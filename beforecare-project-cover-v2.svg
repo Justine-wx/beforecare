@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">beforecare｜好的 aftercare，从 beforecare 开始</title>
+  <desc id="desc">女性私密愉悦探索产品 Beforecare 的项目封面图</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a09"/>
+      <stop offset="0.46" stop-color="#122a29"/>
+      <stop offset="1" stop-color="#4f4a45"/>
+    </linearGradient>
+    <radialGradient id="limeGlow" cx="0.79" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#d8fb62" stop-opacity="0.28"/>
+      <stop offset="0.42" stop-color="#9abf69" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#9abf69" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="peachGlow" cx="0.17" cy="0.90" r="0.60">
+      <stop offset="0" stop-color="#ffd5b0" stop-opacity="0.23"/>
+      <stop offset="1" stop-color="#ffd5b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#162e2a"/>
+      <stop offset="0.58" stop-color="#203d35"/>
+      <stop offset="1" stop-color="#554d48"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19342f"/>
+      <stop offset="1" stop-color="#101a17"/>
+    </linearGradient>
+    <filter id="blur40" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="blur18" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#000" flood-opacity="0.42"/>
+    </filter>
+    <pattern id="grain" width="90" height="90" patternUnits="userSpaceOnUse">
+      <circle cx="11" cy="19" r="0.8" fill="#fff" opacity="0.04"/>
+      <circle cx="54" cy="63" r="0.7" fill="#fff" opacity="0.03"/>
+      <circle cx="81" cy="31" r="0.6" fill="#fff" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#limeGlow)"/>
+  <rect width="1600" height="900" fill="url(#peachGlow)"/>
+  <rect width="1600" height="900" fill="url(#grain)"/>
+
+  <!-- quiet orbit lines -->
+  <g fill="none" stroke="#d8fb62" opacity="0.10">
+    <ellipse cx="1275" cy="430" rx="410" ry="310" stroke-width="2"/>
+    <ellipse cx="1275" cy="430" rx="505" ry="382" stroke-width="1"/>
+    <ellipse cx="1275" cy="430" rx="604" ry="456" stroke-width="1"/>
+  </g>
+  <circle cx="1275" cy="430" r="240" fill="#d8fb62" opacity="0.06" filter="url(#blur40)"/>
+
+  <!-- left copy -->
+  <g font-family="PingFang SC, Noto Sans CJK SC, Helvetica Neue, Arial, sans-serif">
+    <text x="108" y="112" fill="#d8fb62" font-size="18" font-weight="600" letter-spacing="3">beforecare</text>
+    <text x="108" y="155" fill="#d8d0ff" font-size="13" letter-spacing="2.8">PRODUCT DEMO · PRIVATE WELLNESS</text>
+    <rect x="108" y="188" width="54" height="4" rx="2" fill="#d8fb62"/>
+
+    <text x="108" y="330" fill="#f4f5e9" font-size="70" font-weight="500" letter-spacing="-3.5">好的 aftercare，</text>
+    <text x="108" y="422" fill="#f4f5e9" font-size="70" font-weight="500" letter-spacing="-3.5">从 beforecare 开始</text>
+    <text x="112" y="480" fill="#b8c1b5" font-size="23" font-weight="400">一个没有失败、可以随时停下来的</text>
+    <text x="112" y="516" fill="#b8c1b5" font-size="23" font-weight="400">愉悦探索空间。</text>
+
+    <g transform="translate(108 610)">
+      <rect width="165" height="44" rx="22" fill="#d8fb62"/>
+      <text x="82.5" y="28" text-anchor="middle" fill="#222518" font-size="15" font-weight="600">5 分钟体验</text>
+      <rect x="178" width="165" height="44" rx="22" fill="#18241f" stroke="#ffffff" stroke-opacity="0.13"/>
+      <text x="260.5" y="28" text-anchor="middle" fill="#dbe4d5" font-size="15">身体觉察</text>
+      <rect x="356" width="165" height="44" rx="22" fill="#18241f" stroke="#ffffff" stroke-opacity="0.13"/>
+      <text x="438.5" y="28" text-anchor="middle" fill="#dbe4d5" font-size="15">轻柔记录</text>
+    </g>
+    <text x="112" y="764" fill="#838d83" font-size="14" letter-spacing="1.8">一次只做一件事 · 跟着感觉走 · 随时可以停</text>
+  </g>
+
+  <!-- phone mockup -->
+  <g filter="url(#shadow)">
+    <rect x="1016" y="92" width="382" height="724" rx="52" fill="#080b09" stroke="#d8fb62" stroke-opacity="0.24" stroke-width="2"/>
+    <rect x="1028" y="104" width="358" height="700" rx="43" fill="url(#phone)"/>
+    <rect x="1152" y="117" width="110" height="27" rx="14" fill="#030403"/>
+    <text x="1055" y="165" fill="#eef1e6" font-size="12" opacity="0.82" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">9:41</text>
+    <text x="1356" y="165" text-anchor="end" fill="#eef1e6" font-size="12" opacity="0.82" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">●  ▰  ▰</text>
+    <text x="1060" y="220" fill="#d8d0ff" font-size="11" letter-spacing="1.5" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">TODAY / 今天</text>
+    <text x="1060" y="252" fill="#f4f5e9" font-size="27" font-weight="500" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">只看这一件事</text>
+    <text x="1060" y="279" fill="#a7a99d" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">心动欲望 · 约 3 分钟</text>
+
+    <rect x="1053" y="315" width="308" height="314" rx="31" fill="url(#card)" stroke="#d8fb62" stroke-opacity="0.18"/>
+    <circle cx="1207" cy="412" r="54" fill="#d8fb62" opacity="0.08" filter="url(#blur18)"/>
+    <circle cx="1207" cy="412" r="42" fill="none" stroke="#d8fb62" stroke-opacity="0.72" stroke-width="2"/>
+    <circle cx="1207" cy="412" r="49" fill="none" stroke="#d8fb62" stroke-opacity="0.17" stroke-width="7" stroke-dasharray="238 80" transform="rotate(-90 1207 412)"/>
+    <path d="M1207 395 l5 12 12 5 -12 5 -5 12 -5-12 -12-5 12-5z" fill="#d8fb62"/>
+    <text x="1207" y="493" text-anchor="middle" fill="#fbfbf0" font-size="24" font-weight="500" font-family="Songti SC, STSong, serif">这个画面，让你</text>
+    <text x="1207" y="528" text-anchor="middle" fill="#fbfbf0" font-size="24" font-weight="500" font-family="Songti SC, STSong, serif">更想「靠近」，还是「被碰」？</text>
+    <text x="1207" y="573" text-anchor="middle" fill="#b7c2b6" font-size="12" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">让它停十秒，不急着解释</text>
+
+    <rect x="1053" y="654" width="308" height="54" rx="18" fill="#d8fb62"/>
+    <text x="1207" y="688" text-anchor="middle" fill="#222518" font-size="16" font-weight="600" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">继续</text>
+    <text x="1062" y="746" fill="#bbc6b8" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">换个更浅的</text>
+    <text x="1352" y="746" text-anchor="end" fill="#bbc6b8" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">想更深入一点</text>
+    <text x="1207" y="779" text-anchor="middle" fill="#869287" font-size="10" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">语音 ○   音乐 ○</text>
+  </g>
+
+  <!-- breathing star -->
+  <g transform="translate(1438 126)">
+    <circle r="35" fill="#d8fb62" opacity="0.12" filter="url(#blur18)"/>
+    <path d="M0-20 C4-8 8-4 20 0 C8 4 4 8 0 20 C-4 8 -8 4 -20 0 C-8-4 -4-8 0-20Z" fill="#d8fb62"/>
+    <circle r="29" fill="none" stroke="#d8fb62" stroke-opacity="0.38" stroke-width="1.5"/>
+  </g>
+  <text x="1498" y="784" text-anchor="end" fill="#9ca99c" font-size="12" letter-spacing="2" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">beforecare · 2026</text>
+  <!-- scannable product link -->
+  <g transform="translate(700 590)">
+    <rect x="0" y="0" width="238" height="270" rx="24" fill="#111a16" fill-opacity="0.94" stroke="#d8fb62" stroke-opacity="0.22"/>
+    <text x="119" y="27" text-anchor="middle" fill="#d8fb62" font-size="13" font-weight="600" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">扫码体验 beforecare</text>
+    <a href="http://111.62.156.213:10352/" target="_blank" rel="noopener">
+      <rect x="24" y="42" width="190" height="190" rx="8" fill="#fff"/>
+      <image x="24" y="42" width="190" height="190" preserveAspectRatio="none" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNyAzNyI+PHJlY3Qgd2lkdGg9IjM3IiBoZWlnaHQ9IjM3IiBmaWxsPSIjZmZmIi8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTQgNGgxdjFoLTF6TTUgNGgxdjFoLTF6TTYgNGgxdjFoLTF6TTcgNGgxdjFoLTF6TTggNGgxdjFoLTF6TTkgNGgxdjFoLTF6TTEwIDRoMXYxaC0xek0xMiA0aDF2MWgtMXpNMTQgNGgxdjFoLTF6TTE5IDRoMXYxaC0xek0yMCA0aDF2MWgtMXpNMjEgNGgxdjFoLTF6TTI0IDRoMXYxaC0xek0yNiA0aDF2MWgtMXpNMjcgNGgxdjFoLTF6TTI4IDRoMXYxaC0xek0yOSA0aDF2MWgtMXpNMzAgNGgxdjFoLTF6TTMxIDRoMXYxaC0xek0zMiA0aDF2MWgtMXpNNCA1aDF2MWgtMXpNMTAgNWgxdjFoLTF6TTEyIDVoMXYxaC0xek0xMyA1aDF2MWgtMXpNMTQgNWgxdjFoLTF6TTE2IDVoMXYxaC0xek0yMCA1aDF2MWgtMXpNMjIgNWgxdjFoLTF6TTIzIDVoMXYxaC0xek0yNCA1aDF2MWgtMXpNMjYgNWgxdjFoLTF6TTMyIDVoMXYxaC0xek00IDZoMXYxaC0xek02IDZoMXYxaC0xek03IDZoMXYxaC0xek04IDZoMXYxaC0xek0xMCA2aDF2MWgtMXpNMTIgNmgxdjFoLTF6TTEzIDZoMXYxaC0xek0xNCA2aDF2MWgtMXpNMTYgNmgxdjFoLTF6TTE5IDZoMXYxaC0xek0yMCA2aDF2MWgtMXpNMjYgNmgxdjFoLTF6TTI4IDZoMXYxaC0xek0yOSA2aDF2MWgtMXpNMzAgNmgxdjFoLTF6TTMyIDZoMXYxaC0xek00IDdoMXYxaC0xek02IDdoMXYxaC0xek03IDdoMXYxaC0xek04IDdoMXYxaC0xek0xMCA3aDF2MWgtMXpNMTUgN2gxdjFoLTF6TTE2IDdoMXYxaC0xek0yMCA3aDF2MWgtMXpNMjEgN2gxdjFoLTF6TTIyIDdoMXYxaC0xek0yMyA3aDF2MWgtMXpNMjYgN2gxdjFoLTF6TTI4IDdoMXYxaC0xek0yOSA3aDF2MWgtMXpNMzAgN2gxdjFoLTF6TTMyIDdoMXYxaC0xek00IDhoMXYxaC0xek02IDhoMXYxaC0xek03IDhoMXYxaC0xek04IDhoMXYxaC0xek0xMCA4aDF2MWgtMXpNMTIgOGgxdjFoLTF6TTEzIDhoMXYxaC0xek0xNSA4aDF2MWgtMXpNMTYgOGgxdjFoLTF6TTE4IDhoMXYxaC0xek0xOSA4aDF2MWgtMXpNMjAgOGgxdjFoLTF6TTIxIDhoMXYxaC0xek0yMyA4aDF2MWgtMXpNMjQgOGgxdjFoLTF6TTI2IDhoMXYxaC0xek0yOCA4aDF2MWgtMXpNMjkgOGgxdjFoLTF6TTMwIDhoMXYxaC0xek0zMiA4aDF2MWgtMXpNNCA5aDF2MWgtMXpNMTAgOWgxdjFoLTF6TTEzIDloMXYxaC0xek0xNCA5aDF2MWgtMXpNMTYgOWgxdjFoLTF6TTE5IDloMXYxaC0xek0yMCA5aDF2MWgtMXpNMjEgOWgxdjFoLTF6TTIyIDloMXYxaC0xek0yNCA5aDF2MWgtMXpNMjYgOWgxdjFoLTF6TTMyIDloMXYxaC0xek00IDEwaDF2MWgtMXpNNSAxMGgxdjFoLTF6TTYgMTBoMXYxaC0xek03IDEwaDF2MWgtMXpNOCAxMGgxdjFoLTF6TTkgMTBoMXYxaC0xek0xMCAxMGgxdjFoLTF6TTEyIDEwaDF2MWgtMXpNMTQgMTBoMXYxaC0xek0xNiAxMGgxdjFoLTF6TTE4IDEwaDF2MWgtMXpNMjAgMTBoMXYxaC0xek0yMiAxMGgxdjFoLTF6TTI0IDEwaDF2MWgtMXpNMjYgMTBoMXYxaC0xek0yNyAxMGgxdjFoLTF6TTI4IDEwaDF2MWgtMXpNMjkgMTBoMXYxaC0xek0zMCAxMGgxdjFoLTF6TTMxIDEwaDF2MWgtMXpNMzIgMTBoMXYxaC0xek0xMyAxMWgxdjFoLTF6TTE1IDExaDF2MWgtMXpNMTYgMTFoMXYxaC0xek0xNyAxMWgxdjFoLTF6TTE5IDExaDF2MWgtMXpNMjAgMTFoMXYxaC0xek0yMiAxMWgxdjFoLTF6TTI0IDExaDF2MWgtMXpNNCAxMmgxdjFoLTF6TTcgMTJoMXYxaC0xek04IDEyaDF2MWgtMXpNOSAxMmgxdjFoLTF6TTEwIDEyaDF2MWgtMXpNMTEgMTJoMXYxaC0xek0xMiAxMmgxdjFoLTF6TTE0IDEyaDF2MWgtMXpNMTcgMTJoMXYxaC0xek0yMSAxMmgxdjFoLTF6TTIyIDEyaDF2MWgtMXpNMjMgMTJoMXYxaC0xek0yNCAxMmgxdjFoLTF6TTI1IDEyaDF2MWgtMXpNMjggMTJoMXYxaC0xek0zMCAxMmgxdjFoLTF6TTMxIDEyaDF2MWgtMXpNMzIgMTJoMXYxaC0xek02IDEzaDF2MWgtMXpNNyAxM2gxdjFoLTF6TTExIDEzaDF2MWgtMXpNMTIgMTNoMXYxaC0xek0xNCAxM2gxdjFoLTF6TTE1IDEzaDF2MWgtMXpNMTcgMTNoMXYxaC0xek0yMCAxM2gxdjFoLTF6TTIzIDEzaDF2MWgtMXpNMjQgMTNoMXYxaC0xek0yNSAxM2gxdjFoLTF6TTI4IDEzaDF2MWgtMXpNMzAgMTNoMXYxaC0xek0zMSAxM2gxdjFoLTF6TTQgMTRoMXYxaC0xek05IDE0aDF2MWgtMXpNMTAgMTRoMXYxaC0xek0xMSAxNGgxdjFoLTF6TTEyIDE0aDF2MWgtMXpNMTMgMTRoMXYxaC0xek0xNSAxNGgxdjFoLTF6TTE3IDE0aDF2MWgtMXpNMTkgMTRoMXYxaC0xek0yMCAxNGgxdjFoLTF6TTIyIDE0aDF2MWgtMXpNMjUgMTRoMXYxaC0xek0yNyAxNGgxdjFoLTF6TTMwIDE0aDF2MWgtMXpNNCAxNWgxdjFoLTF6TTUgMTVoMXYxaC0xek03IDE1aDF2MWgtMXpNMTIgMTVoMXYxaC0xek0xNCAxNWgxdjFoLTF6TTE1IDE1aDF2MWgtMXpNMTYgMTVoMXYxaC0xek0xNyAxNWgxdjFoLTF6TTIwIDE1aDF2MWgtMXpNMjEgMTVoMXYxaC0xek0yOCAxNWgxdjFoLTF6TTMyIDE1aDF2MWgtMXpNNSAxNmgxdjFoLTF6TTYgMTZoMXYxaC0xek03IDE2aDF2MWgtMXpNMTAgMTZoMXYxaC0xek0xMSAxNmgxdjFoLTF6TTEyIDE2aDF2MWgtMXpNMTMgMTZoMXYxaC0xek0xNCAxNmgxdjFoLTF6TTE2IDE2aDF2MWgtMXpNMTcgMTZoMXYxaC0xek0xOSAxNmgxdjFoLTF6TTIwIDE2aDF2MWgtMXpNMjIgMTZoMXYxaC0xek0yMyAxNmgxdjFoLTF6TTI1IDE2aDF2MWgtMXpNMjYgMTZoMXYxaC0xek0zMiAxNmgxdjFoLTF6TTQgMTdoMXYxaC0xek03IDE3aDF2MWgtMXpNOCAxN2gxdjFoLTF6TTEzIDE3aDF2MWgtMXpNMTQgMTdoMXYxaC0xek0xNyAxN2gxdjFoLTF6TTE4IDE3aDF2MWgtMXpNMjAgMTdoMXYxaC0xek0yNCAxN2gxdjFoLTF6TTI2IDE3aDF2MWgtMXpNMjggMTdoMXYxaC0xek0yOSAxN2gxdjFoLTF6TTMxIDE3aDF2MWgtMXpNMzIgMTdoMXYxaC0xek00IDE4aDF2MWgtMXpNNyAxOGgxdjFoLTF6TTggMThoMXYxaC0xek05IDE4aDF2MWgtMXpNMTAgMThoMXYxaC0xek0xMiAxOGgxdjFoLTF6TTE0IDE4aDF2MWgtMXpNMTcgMThoMXYxaC0xek0yMCAxOGgxdjFoLTF6TTIzIDE4aDF2MWgtMXpNMjkgMThoMXYxaC0xek0zMCAxOGgxdjFoLTF6TTMyIDE4aDF2MWgtMXpNNSAxOWgxdjFoLTF6TTcgMTloMXYxaC0xek04IDE5aDF2MWgtMXpNOSAxOWgxdjFoLTF6TTE0IDE5aDF2MWgtMXpNMTUgMTloMXYxaC0xek0xNiAxOWgxdjFoLTF6TTE5IDE5aDF2MWgtMXpNMjMgMTloMXYxaC0xek0yNCAxOWgxdjFoLTF6TTI3IDE5aDF2MWgtMXpNMzAgMTloMXYxaC0xek0zMiAxOWgxdjFoLTF6TTkgMjBoMXYxaC0xek0xMCAyMGgxdjFoLTF6TTExIDIwaDF2MWgtMXpNMTIgMjBoMXYxaC0xek0xOCAyMGgxdjFoLTF6TTIwIDIwaDF2MWgtMXpNMjIgMjBoMXYxaC0xek0yNSAyMGgxdjFoLTF6TTI3IDIwaDF2MWgtMXpNNCAyMWgxdjFoLTF6TTUgMjFoMXYxaC0xek0xNCAyMWgxdjFoLTF6TTE2IDIxaDF2MWgtMXpNMTcgMjFoMXYxaC0xek0xOCAyMWgxdjFoLTF6TTIwIDIxaDF2MWgtMXpNMjEgMjFoMXYxaC0xek0yMyAyMWgxdjFoLTF6TTI1IDIxaDF2MWgtMXpNMjcgMjFoMXYxaC0xek0yOCAyMWgxdjFoLTF6TTI5IDIxaDF2MWgtMXpNMzAgMjFoMXYxaC0xek0zMSAyMWgxdjFoLTF6TTQgMjJoMXYxaC0xek01IDIyaDF2MWgtMXpNNiAyMmgxdjFoLTF6TTkgMjJoMXYxaC0xek0xMCAyMmgxdjFoLTF6TTEzIDIyaDF2MWgtMXpNMTQgMjJoMXYxaC0xek0xNSAyMmgxdjFoLTF6TTE5IDIyaDF2MWgtMXpNMjIgMjJoMXYxaC0xek0yMyAyMmgxdjFoLTF6TTI0IDIyaDF2MWgtMXpNMjUgMjJoMXYxaC0xek0yNiAyMmgxdjFoLTF6TTI4IDIyaDF2MWgtMXpNMzIgMjJoMXYxaC0xek00IDIzaDF2MWgtMXpNNSAyM2gxdjFoLTF6TTYgMjNoMXYxaC0xek05IDIzaDF2MWgtMXpNMTIgMjNoMXYxaC0xek0xMyAyM2gxdjFoLTF6TTE0IDIzaDF2MWgtMXpNMTggMjNoMXYxaC0xek0yMiAyM2gxdjFoLTF6TTI1IDIzaDF2MWgtMXpNMjggMjNoMXYxaC0xek0yOSAyM2gxdjFoLTF6TTMwIDIzaDF2MWgtMXpNNCAyNGgxdjFoLTF6TTUgMjRoMXYxaC0xek04IDI0aDF2MWgtMXpNOSAyNGgxdjFoLTF6TTEwIDI0aDF2MWgtMXpNMTUgMjRoMXYxaC0xek0xNyAyNGgxdjFoLTF6TTE4IDI0aDF2MWgtMXpNMTkgMjRoMXYxaC0xek0yMCAyNGgxdjFoLTF6TTIxIDI0aDF2MWgtMXpNMjIgMjRoMXYxaC0xek0yNCAyNGgxdjFoLTF6TTI1IDI0aDF2MWgtMXpNMjYgMjRoMXYxaC0xek0yNyAyNGgxdjFoLTF6TTI4IDI0aDF2MWgtMXpNMjkgMjRoMXYxaC0xek0zMCAyNGgxdjFoLTF6TTMxIDI0aDF2MWgtMXpNMTIgMjVoMXYxaC0xek0xOCAyNWgxdjFoLTF6TTIxIDI1aDF2MWgtMXpNMjIgMjVoMXYxaC0xek0yNCAyNWgxdjFoLTF6TTI4IDI1aDF2MWgtMXpNMjkgMjVoMXYxaC0xek00IDI2aDF2MWgtMXpNNSAyNmgxdjFoLTF6TTYgMjZoMXYxaC0xek03IDI2aDF2MWgtMXpNOCAyNmgxdjFoLTF6TTkgMjZoMXYxaC0xek0xMCAyNmgxdjFoLTF6TTEyIDI2aDF2MWgtMXpNMTMgMjZoMXYxaC0xek0xNSAyNmgxdjFoLTF6TTE2IDI2aDF2MWgtMXpNMTggMjZoMXYxaC0xek0yMyAyNmgxdjFoLTF6TTI0IDI2aDF2MWgtMXpNMjYgMjZoMXYxaC0xek0yOCAyNmgxdjFoLTF6TTI5IDI2aDF2MWgtMXpNNCAyN2gxdjFoLTF6TTEwIDI3aDF2MWgtMXpNMTIgMjdoMXYxaC0xek0xMyAyN2gxdjFoLTF6TTE4IDI3aDF2MWgtMXpNMTkgMjdoMXYxaC0xek0yMSAyN2gxdjFoLTF6TTI0IDI3aDF2MWgtMXpNMjggMjdoMXYxaC0xek0zMiAyN2gxdjFoLTF6TTQgMjhoMXYxaC0xek02IDI4aDF2MWgtMXpNNyAyOGgxdjFoLTF6TTggMjhoMXYxaC0xek0xMCAyOGgxdjFoLTF6TTEyIDI4aDF2MWgtMXpNMTMgMjhoMXYxaC0xek0xNSAyOGgxdjFoLTF6TTE2IDI4aDF2MWgtMXpNMTcgMjhoMXYxaC0xek0xOCAyOGgxdjFoLTF6TTIxIDI4aDF2MWgtMXpNMjIgMjhoMXYxaC0xek0yMyAyOGgxdjFoLTF6TTI0IDI4aDF2MWgtMXpNMjUgMjhoMXYxaC0xek0yNiAyOGgxdjFoLTF6TTI3IDI4aDF2MWgtMXpNMjggMjhoMXYxaC0xek00IDI5aDF2MWgtMXpNNiAyOWgxdjFoLTF6TTcgMjloMXYxaC0xek04IDI5aDF2MWgtMXpNMTAgMjloMXYxaC0xek0xMiAyOWgxdjFoLTF6TTEzIDI5aDF2MWgtMXpNMTUgMjloMXYxaC0xek0xNiAyOWgxdjFoLTF6TTE3IDI5aDF2MWgtMXpNMjEgMjloMXYxaC0xek0yMiAyOWgxdjFoLTF6TTIzIDI5aDF2MWgtMXpNMjcgMjloMXYxaC0xek0yOSAyOWgxdjFoLTF6TTMwIDI5aDF2MWgtMXpNMzEgMjloMXYxaC0xek00IDMwaDF2MWgtMXpNNiAzMGgxdjFoLTF6TTcgMzBoMXYxaC0xek04IDMwaDF2MWgtMXpNMTAgMzBoMXYxaC0xek0xMyAzMGgxdjFoLTF6TTE1IDMwaDF2MWgtMXpNMTYgMzBoMXYxaC0xek0xNyAzMGgxdjFoLTF6TTE4IDMwaDF2MWgtMXpNMTkgMzBoMXYxaC0xek0yMSAzMGgxdjFoLTF6TTI4IDMwaDF2MWgtMXpNMzEgMzBoMXYxaC0xek0zMiAzMGgxdjFoLTF6TTQgMzFoMXYxaC0xek0xMCAzMWgxdjFoLTF6TTEzIDMxaDF2MWgtMXpNMTUgMzFoMXYxaC0xek0xNiAzMWgxdjFoLTF6TTE3IDMxaDF2MWgtMXpNMjAgMzFoMXYxaC0xek0yMSAzMWgxdjFoLTF6TTIyIDMxaDF2MWgtMXpNMjMgMzFoMXYxaC0xek0yNSAzMWgxdjFoLTF6TTI2IDMxaDF2MWgtMXpNMjcgMzFoMXYxaC0xek0yOCAzMWgxdjFoLTF6TTMwIDMxaDF2MWgtMXpNMzIgMzFoMXYxaC0xek00IDMyaDF2MWgtMXpNNSAzMmgxdjFoLTF6TTYgMzJoMXYxaC0xek03IDMyaDF2MWgtMXpNOCAzMmgxdjFoLTF6TTkgMzJoMXYxaC0xek0xMCAzMmgxdjFoLTF6TTEyIDMyaDF2MWgtMXpNMTMgMzJoMXYxaC0xek0xNCAzMmgxdjFoLTF6TTE3IDMyaDF2MWgtMXpNMTggMzJoMXYxaC0xek0xOSAzMmgxdjFoLTF6TTIxIDMyaDF2MWgtMXpNMjQgMzJoMXYxaC0xek0yNyAzMmgxdjFoLTF6TTI4IDMyaDF2MWgtMXpNMjkgMzJoMXYxaC0xeiIvPjwvc3ZnPg=="/>
+    </a>
+    <text x="119" y="252" text-anchor="middle" fill="#b8c5b7" font-size="10" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">111.62.156.213:10352</text>
+  </g>
+</svg>
