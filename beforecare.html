@@ -1,0 +1,640 @@
+<div id="yueji-complete-demo" aria-label="Beforecare 完整流程 iOS 交互 Demo">
+  <style>
+    #yueji-complete-demo {
+      --yj-bg:#090a08; --yj-surface:#161814; --yj-surface-2:#20231d; --yj-ink:#f4f5e9;
+      --yj-muted:#a7a99d; --yj-dim:#777a70; --yj-line:rgba(255,255,255,.10); --yj-lime:#d8fb62;
+      --yj-lime-ink:#222518; --yj-lilac:#d8d0ff; --yj-peach:#ffd5b0;
+      color:var(--yj-ink); font-family:ui-rounded,"SF Pro Rounded","PingFang SC","Helvetica Neue",sans-serif; width:100%;
+    }
+    #yueji-complete-demo * { box-sizing:border-box; }
+    #yueji-complete-demo .yj-stage { display:grid; place-items:center; padding:12px 0; }
+    #yueji-complete-demo .yj-phone { position:relative; width:min(100%,390px); overflow:hidden; border:1px solid rgba(255,255,255,.16); border-radius:41px; background:var(--yj-bg); box-shadow:0 25px 65px rgba(0,0,0,.38); }
+    #yueji-complete-demo .yj-status { position:relative; z-index:2; display:flex; justify-content:space-between; padding:20px 27px 0; font-size:12px; font-weight:600; }
+    #yueji-complete-demo .yj-island { position:absolute; z-index:4; top:14px; left:50%; width:108px; height:29px; transform:translateX(-50%); border-radius:20px; background:#020302; }
+    #yueji-complete-demo .yj-shell { position:relative; min-height:720px; }
+    #yueji-complete-demo .yj-screen { position:relative; z-index:2; min-height:678px; padding:38px 22px 26px; }
+    #yueji-complete-demo .yj-screen.has-nav { padding-bottom:12px; }
+    #yueji-complete-demo .yj-kicker { margin:0 0 9px; color:var(--yj-lilac); font-size:11px; font-weight:600; letter-spacing:.045em; }
+    #yueji-complete-demo h1 { margin:0; color:var(--yj-ink); font-size:29px; font-weight:500; line-height:1.22; letter-spacing:-.05em; }
+    #yueji-complete-demo h2 { margin:0; color:var(--yj-ink); font-size:16px; font-weight:500; letter-spacing:-.02em; }
+    #yueji-complete-demo .yj-lede { margin:12px 0 22px; color:var(--yj-muted); font-size:13px; line-height:1.65; }
+    #yueji-complete-demo .yj-small { margin:8px 0 0; color:var(--yj-dim); font-size:11px; line-height:1.55; }
+    #yueji-complete-demo button { font:inherit; }
+    #yueji-complete-demo .yj-primary { width:100%; margin-top:16px; padding:16px 14px; color:var(--yj-lime-ink); border:0; border-radius:20px; background:var(--yj-lime); cursor:pointer; font-size:14px; font-weight:600; }
+    #yueji-complete-demo .yj-secondary { width:100%; margin-top:10px; padding:12px; color:var(--yj-muted); border:0; background:transparent; cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-back { display:inline-flex; gap:5px; align-items:center; margin:0 0 25px; padding:0; color:var(--yj-muted); border:0; background:transparent; cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-privacy-mark { display:grid; place-items:center; width:75px; height:75px; margin:42px auto 24px; color:var(--yj-lime); border:1px solid rgba(216,251,98,.30); border-radius:50%; background:radial-gradient(circle,rgba(216,251,98,.18),transparent 65%); font-size:31px; }
+    #yueji-complete-demo .yj-promise { display:flex; gap:12px; align-items:flex-start; margin:13px 0; padding:14px; border:1px solid var(--yj-line); border-radius:17px; background:var(--yj-surface); }
+    #yueji-complete-demo .yj-promise b { color:var(--yj-lime); font-size:15px; }
+    #yueji-complete-demo .yj-promise strong { display:block; color:var(--yj-ink); font-size:13px; font-weight:500; }
+    #yueji-complete-demo .yj-promise span { display:block; margin-top:3px; color:var(--yj-muted); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-check { display:flex; gap:8px; align-items:center; margin:22px 2px 0; color:var(--yj-muted); font-size:12px; cursor:pointer; }
+    #yueji-complete-demo .yj-check input { accent-color:var(--yj-lime); }
+    #yueji-complete-demo .yj-home-head { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; }
+    #yueji-complete-demo .yj-today-head { display:flex; justify-content:space-between; align-items:center; margin:1px 1px 14px; }
+    #yueji-complete-demo .yj-today-head .yj-kicker { margin:0; }
+    #yueji-complete-demo .yj-cycle { padding:7px 9px; color:var(--yj-muted); border:1px solid rgba(255,255,255,.10); border-radius:999px; background:rgba(255,255,255,.035); cursor:pointer; font-size:10px; }
+    #yueji-complete-demo .yj-today-hero { position:relative; display:block; width:100%; min-height:474px; overflow:hidden; padding:22px 20px; color:var(--yj-ink); text-align:left; border:0; border-radius:38px 38px 42px 42px; background:#203833; cursor:pointer; isolation:isolate; }
+    #yueji-complete-demo .yj-today-hero::before { content:""; position:absolute; z-index:-1; inset:-24%; background:radial-gradient(ellipse at 86% 7%,rgba(216,251,98,.28),transparent 31%),radial-gradient(ellipse at 12% 93%,rgba(255,181,139,.38),transparent 41%),linear-gradient(142deg,#122a29,#1c342b 48%,#595353); filter:blur(15px); animation:yj-hero-drift 14s ease-in-out infinite alternate; }
+    #yueji-complete-demo .yj-today-hero.yj-tone-preference::before { background:radial-gradient(ellipse at 78% 18%,rgba(216,251,98,.42),transparent 30%),radial-gradient(ellipse at 20% 84%,rgba(128,166,150,.38),transparent 43%),linear-gradient(132deg,#102721,#31452e 48%,#5b5143); }
+    #yueji-complete-demo .yj-today-hero.yj-tone-ambience::before { background:radial-gradient(ellipse at 77% 20%,rgba(206,188,255,.35),transparent 30%),radial-gradient(ellipse at 13% 86%,rgba(255,190,148,.34),transparent 43%),linear-gradient(132deg,#182837,#344050 44%,#69515c); }
+    #yueji-complete-demo .yj-today-hero.yj-tone-communication::before { background:radial-gradient(ellipse at 81% 15%,rgba(255,203,150,.46),transparent 28%),radial-gradient(ellipse at 14% 86%,rgba(117,160,131,.30),transparent 42%),linear-gradient(132deg,#28180f,#754314 52%,#95745e); }
+    #yueji-complete-demo .yj-today-hero.yj-tone-sync::before { background:radial-gradient(ellipse at 84% 12%,rgba(216,251,98,.32),transparent 27%),radial-gradient(ellipse at 12% 86%,rgba(163,179,230,.31),transparent 42%),linear-gradient(132deg,#102530,#314650 49%,#5f5b67); }
+    #yueji-complete-demo .yj-today-hero > * { position:relative; z-index:1; }
+    #yueji-complete-demo .yj-today-pill { display:inline-flex; align-items:center; gap:7px; padding:8px 12px; color:rgba(251,252,244,.92); border-radius:999px; background:rgba(12,17,15,.24); font-size:11px; }
+    #yueji-complete-demo .yj-today-eyebrow { display:block; margin-top:192px; color:rgba(249,250,240,.78); font-size:13px; }
+    #yueji-complete-demo .yj-today-hero strong { display:block; margin-top:5px; color:#fbfbf0; font-size:42px; font-weight:500; line-height:1.05; letter-spacing:-.07em; }
+    #yueji-complete-demo .yj-today-hero p { max-width:238px; margin:13px 0 0; color:rgba(250,250,241,.77); font-size:13px; line-height:1.65; }
+    #yueji-complete-demo .yj-today-hint { position:absolute; right:19px; bottom:20px; padding:8px 11px; color:rgba(251,252,242,.88); border-radius:999px; background:rgba(8,12,11,.20); font-size:10px; }
+    #yueji-complete-demo .yj-today-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
+    #yueji-complete-demo .yj-today-actions button { min-height:48px; padding:10px; color:var(--yj-ink); border:0; border-radius:20px; background:var(--yj-surface); cursor:pointer; font-size:11px; }
+    #yueji-complete-demo .yj-today-actions button:first-child { color:var(--yj-lime-ink); background:var(--yj-lime); }
+    #yueji-complete-demo .yj-browse-item { position:relative; display:block; width:100%; min-height:116px; margin:10px 0; overflow:hidden; padding:16px; color:var(--yj-ink); text-align:left; border:0; border-radius:27px; background:#17201d; cursor:pointer; }
+    #yueji-complete-demo .yj-browse-item::before { content:""; position:absolute; inset:-45%; opacity:.82; background:radial-gradient(circle at 77% 25%,rgba(216,251,98,.24),transparent 29%),radial-gradient(circle at 18% 82%,rgba(255,198,155,.23),transparent 42%),#19261f; filter:blur(17px); }
+    #yueji-complete-demo .yj-browse-item.yj-tone-ambience::before { background:radial-gradient(circle at 80% 18%,rgba(203,186,255,.34),transparent 27%),radial-gradient(circle at 16% 80%,rgba(255,190,154,.22),transparent 41%),#1a2830; }
+    #yueji-complete-demo .yj-browse-item.yj-tone-communication::before { background:radial-gradient(circle at 80% 18%,rgba(255,187,119,.39),transparent 27%),radial-gradient(circle at 15% 81%,rgba(137,172,120,.20),transparent 40%),#352315; }
+    #yueji-complete-demo .yj-browse-item.yj-tone-sync::before { background:radial-gradient(circle at 78% 18%,rgba(216,251,98,.28),transparent 27%),radial-gradient(circle at 16% 81%,rgba(172,178,233,.25),transparent 40%),#17303a; }
+    #yueji-complete-demo .yj-browse-item > * { position:relative; z-index:1; }
+    #yueji-complete-demo .yj-browse-item b { display:inline-flex; align-items:center; gap:7px; padding:7px 10px; color:rgba(250,251,242,.92); border-radius:999px; background:rgba(14,17,15,.21); font-size:11px; font-weight:500; }
+    #yueji-complete-demo .yj-browse-item strong { display:block; margin-top:17px; color:#fbfbf0; font-size:23px; font-weight:500; letter-spacing:-.05em; }
+    #yueji-complete-demo .yj-browse-item p { margin:5px 0 0; color:rgba(250,250,241,.74); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-section-label { margin:18px 0 8px; color:var(--yj-dim); font-size:10px; font-weight:600; letter-spacing:.06em; }
+    #yueji-complete-demo .yj-home-card { width:100%; display:block; margin:9px 0; padding:14px; color:var(--yj-ink); text-align:left; border:1px solid var(--yj-line); border-radius:19px; background:var(--yj-surface); cursor:pointer; }
+    #yueji-complete-demo .yj-home-card.yj-hot { border-color:rgba(216,251,98,.28); background:radial-gradient(circle at 88% 22%,rgba(216,251,98,.20),transparent 29%),var(--yj-surface); }
+    #yueji-complete-demo .yj-home-card.yj-partner { background:radial-gradient(circle at 88% 20%,rgba(216,203,255,.16),transparent 30%),var(--yj-surface); }
+    #yueji-complete-demo .yj-home-card strong { display:flex; align-items:center; gap:8px; font-size:16px; font-weight:500; }
+    #yueji-complete-demo .yj-home-card strong em { margin-left:auto; color:var(--yj-muted); font-size:17px; font-style:normal; font-weight:400; }
+    #yueji-complete-demo .yj-home-card p { margin:7px 0 0; color:var(--yj-muted); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-surprise { width:100%; margin-top:6px; padding:13px; color:var(--yj-peach); border:1px solid rgba(255,213,176,.22); border-radius:17px; background:rgba(255,213,176,.055); cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-nav { position:relative; z-index:2; display:flex; justify-content:space-around; gap:2px; padding:11px 14px 17px; border-top:1px solid rgba(255,255,255,.07); background:var(--yj-bg); }
+    #yueji-complete-demo .yj-nav button { min-width:48px; color:var(--yj-dim); border:0; background:none; cursor:pointer; font-size:10px; }
+    #yueji-complete-demo .yj-nav b { display:block; margin-bottom:3px; font-size:17px; font-weight:400; }
+    #yueji-complete-demo .yj-nav button.is-active { color:var(--yj-lime); }
+    #yueji-complete-demo .yj-line-banner { margin:0 0 16px; padding:12px 13px; border-radius:15px; background:rgba(216,251,98,.07); color:#d8e6ad; font-size:11px; line-height:1.55; }
+    #yueji-complete-demo .yj-activity { width:100%; display:flex; align-items:center; gap:10px; margin:8px 0; padding:11px 12px; color:var(--yj-ink); text-align:left; border:1px solid var(--yj-line); border-radius:15px; background:var(--yj-surface); cursor:pointer; }
+    #yueji-complete-demo .yj-activity b { display:grid; place-items:center; flex:none; width:24px; height:24px; color:var(--yj-lime); border-radius:50%; background:rgba(216,251,98,.08); font-size:10px; font-weight:500; }
+    #yueji-complete-demo .yj-activity span { font-size:12px; font-weight:500; }
+    #yueji-complete-demo .yj-activity small { display:block; margin-top:2px; color:var(--yj-muted); font-size:10px; font-weight:400; }
+    #yueji-complete-demo .yj-lead-card { margin:22px 0; padding:19px; border:1px solid rgba(216,251,98,.22); border-radius:22px; background:radial-gradient(circle at 82% 10%,rgba(216,251,98,.17),transparent 33%),var(--yj-surface); }
+    #yueji-complete-demo .yj-lead-card p { margin:12px 0 0; color:var(--yj-muted); font-size:13px; line-height:1.65; }
+    #yueji-complete-demo .yj-meta { display:flex; gap:8px; margin-top:15px; color:var(--yj-dim); font-size:10px; }
+    #yueji-complete-demo .yj-meta span { padding:5px 7px; border-radius:9px; background:rgba(0,0,0,.17); }
+    #yueji-complete-demo .yj-orb-space { position:relative; display:grid; place-items:center; height:208px; margin:0 0 7px; }
+    #yueji-complete-demo .yj-orb { --yj-progress:0; position:relative; width:164px; height:164px; padding:3px; border:0; border-radius:50%; background:conic-gradient(var(--yj-lime) calc(var(--yj-progress) * 1turn),rgba(216,251,98,.16) 0); box-shadow:0 0 62px rgba(216,251,98,.10); cursor:pointer; animation:yj-breathe 5s ease-in-out infinite; }
+    #yueji-complete-demo .yj-orb::after { content:""; position:absolute; inset:3px; border-radius:50%; background:radial-gradient(circle,rgba(216,251,98,.20),rgba(216,251,98,.025) 47%,transparent 72%),var(--yj-bg); }
+    #yueji-complete-demo .yj-orb.is-paused { animation:none; opacity:.66; }
+    #yueji-complete-demo .yj-guide-safety { display:flex; justify-content:space-between; align-items:center; margin:0 0 2px; }
+    #yueji-complete-demo .yj-guide-safety button { padding:8px 11px; border-radius:999px; cursor:pointer; font-size:10px; }
+    #yueji-complete-demo .yj-guide-pause { color:#e8f5bf; border:1px solid rgba(216,251,98,.34); background:rgba(216,251,98,.08); }
+    #yueji-complete-demo .yj-guide-exit { color:var(--yj-muted); border:1px solid var(--yj-line); background:rgba(255,255,255,.025); }
+    #yueji-complete-demo .yj-guide-copy { margin:0 auto; max-width:302px; color:var(--yj-ink); text-align:center; font-size:17px; line-height:1.66; }
+    #yueji-complete-demo .yj-step-actions { display:flex; gap:9px; margin-top:24px; }
+    #yueji-complete-demo .yj-step-actions button { flex:1; padding:13px 8px; border-radius:16px; cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-prev { color:var(--yj-muted); border:1px solid var(--yj-line); background:var(--yj-surface); }
+    #yueji-complete-demo .yj-next { color:var(--yj-lime-ink); border:0; background:var(--yj-lime); font-weight:600; }
+    #yueji-complete-demo .yj-question-tools { display:flex; flex-wrap:wrap; justify-content:center; gap:7px; margin:13px auto 0; }
+    #yueji-complete-demo .yj-question-tools button { padding:7px 10px; color:var(--yj-muted); border:1px solid var(--yj-line); border-radius:999px; background:rgba(255,255,255,.018); cursor:pointer; font-size:10px; letter-spacing:.02em; }
+    #yueji-complete-demo .yj-question-tools button:active { color:var(--yj-lime); border-color:rgba(216,251,98,.48); transform:scale(.97); }
+    #yueji-complete-demo .yj-option { width:100%; margin:8px 0; padding:12px; color:var(--yj-ink); text-align:left; border:1px solid var(--yj-line); border-radius:15px; background:var(--yj-surface); cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-option.is-selected { color:var(--yj-lime-ink); border-color:var(--yj-lime); background:var(--yj-lime); }
+    #yueji-complete-demo .yj-reflect .yj-tag { display:inline-block; margin:0 7px 9px 0; padding:10px 12px; color:var(--yj-ink); border:1px solid var(--yj-line); border-radius:15px; background:var(--yj-surface); cursor:pointer; font-size:12px; }
+    #yueji-complete-demo .yj-reflect .yj-tag.is-selected { color:var(--yj-lime-ink); border-color:var(--yj-lime); background:var(--yj-lime); }
+    #yueji-complete-demo .yj-note-field { display:block; margin:9px 0 0; color:var(--yj-muted); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-note-field textarea { display:block; width:100%; min-height:64px; margin-top:7px; padding:11px 12px; resize:vertical; color:var(--yj-ink); border:1px solid var(--yj-line); border-radius:15px; outline:none; background:var(--yj-surface); font:inherit; font-size:12px; line-height:1.5; }
+    #yueji-complete-demo .yj-note-field textarea:focus { border-color:rgba(216,251,98,.55); }
+    #yueji-complete-demo .yj-mini-toggles { display:flex; justify-content:center; gap:9px; margin:17px 0 0; }
+    #yueji-complete-demo .yj-mini-toggle { display:inline-flex; align-items:center; gap:7px; padding:7px 8px 7px 10px; color:var(--yj-muted); border:1px solid var(--yj-line); border-radius:999px; background:rgba(255,255,255,.025); cursor:pointer; font-size:10px; }
+    #yueji-complete-demo .yj-mini-toggle i { display:block; width:23px; height:13px; border-radius:999px; background:#555950; transition:background .2s ease; }
+    #yueji-complete-demo .yj-mini-toggle i::after { content:""; display:block; width:9px; height:9px; margin:2px; border-radius:50%; background:#e8e9df; transition:transform .2s ease; }
+    #yueji-complete-demo .yj-mini-toggle.is-on { color:var(--yj-ink); }
+    #yueji-complete-demo .yj-mini-toggle.is-on i { background:var(--yj-lime); }
+    #yueji-complete-demo .yj-mini-toggle.is-on i::after { transform:translateX(10px); background:#263019; }
+    #yueji-complete-demo .yj-guide-audio-status { margin:14px auto 0; color:var(--yj-dim); text-align:center; font-size:10px; line-height:1.5; }
+    #yueji-complete-demo .yj-guide-audio-status b { color:#dfe9b7; font-weight:500; }
+    #yueji-complete-demo .yj-sound-caption { margin:-5px 0 17px; color:var(--yj-dim); font-size:11px; line-height:1.6; }
+    #yueji-complete-demo .yj-sound-choices { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+    #yueji-complete-demo .yj-sound-choice { min-height:74px; padding:11px; color:var(--yj-muted); text-align:left; border:1px solid var(--yj-line); border-radius:17px; background:var(--yj-surface); cursor:pointer; }
+    #yueji-complete-demo .yj-sound-choice strong { display:block; color:var(--yj-ink); font-size:12px; font-weight:500; }
+    #yueji-complete-demo .yj-sound-choice small { display:block; margin-top:5px; color:var(--yj-dim); font-size:9px; line-height:1.35; }
+    #yueji-complete-demo .yj-sound-choice.is-selected { border-color:rgba(216,251,98,.58); background:rgba(216,251,98,.09); }
+    #yueji-complete-demo .yj-sound-choice.is-selected strong { color:var(--yj-lime); }
+    #yueji-complete-demo .yj-lake-scene { position:relative; height:294px; margin:10px -13px 7px; isolation:isolate; overflow:visible; background:none; }
+    #yueji-complete-demo .yj-lake-scene::before { content:""; position:absolute; z-index:0; inset:7px 9px; border-radius:48% 52% 50% 50% / 13% 14% 18% 17%; background:radial-gradient(ellipse at 50% 78%,rgba(216,251,98,.13),transparent 48%),linear-gradient(180deg,rgba(117,88,102,.66),rgba(15,36,44,.72)); filter:blur(14px); opacity:.86; }
+    #yueji-complete-demo .yj-lake-canvas { position:absolute; z-index:1; inset:0; width:100%; height:100%; border-radius:48% 52% 50% 50% / 13% 14% 18% 17%; -webkit-mask-image:radial-gradient(ellipse 98% 96% at 50% 50%,#000 58%,rgba(0,0,0,.72) 73%,transparent 100%); mask-image:radial-gradient(ellipse 98% 96% at 50% 50%,#000 58%,rgba(0,0,0,.72) 73%,transparent 100%); }
+    #yueji-complete-demo .yj-lake-title { position:absolute; z-index:2; top:21px; left:25px; color:rgba(249,249,235,.94); font-family:Georgia,"Songti SC",serif; font-size:18px; letter-spacing:-.03em; }
+    #yueji-complete-demo .yj-lake-copy { position:absolute; z-index:2; top:47px; left:25px; right:26px; color:rgba(239,244,223,.70); font-size:10px; line-height:1.55; }
+    #yueji-complete-demo .yj-lake-count { position:absolute; z-index:2; right:26px; bottom:21px; padding:7px 10px; color:#e8f5bf; border:0; border-radius:999px; background:rgba(7,18,21,.28); font-size:10px; }
+    #yueji-complete-demo .yj-lake-count b { color:var(--yj-lime); font-size:13px; font-weight:500; }
+    #yueji-complete-demo .yj-map-block { margin:11px 0; padding:14px 15px; border:1px solid rgba(255,255,255,.09); border-radius:18px; background:linear-gradient(110deg,rgba(33,54,53,.64),rgba(17,24,23,.80)); }
+    #yueji-complete-demo .yj-map-block h2 { margin:0 0 11px; color:#e6e6d9; font-size:12px; letter-spacing:.03em; }
+    #yueji-complete-demo .yj-map-block h2 b { margin-right:6px; color:var(--yj-lime); }
+    #yueji-complete-demo .yj-chip { display:inline-block; margin:0 6px 7px 0; padding:7px 9px; color:#bec0b5; border:1px solid rgba(255,255,255,.10); border-radius:14px; font-size:10px; }
+    #yueji-complete-demo .yj-empty { color:var(--yj-dim); font-size:11px; }
+    #yueji-complete-demo .yj-prototype { margin-top:17px; padding:14px; color:#e1eeb8; border:1px solid rgba(216,251,98,.25); border-radius:17px; background:rgba(216,251,98,.07); font-size:12px; line-height:1.6; }
+    #yueji-complete-demo .yj-shared-entry { margin:9px 0; padding:12px; border:1px solid var(--yj-line); border-radius:15px; background:var(--yj-surface); }
+    #yueji-complete-demo .yj-shared-entry strong { display:block; color:var(--yj-ink); font-size:12px; font-weight:500; }
+    #yueji-complete-demo .yj-shared-entry span { display:block; margin-top:5px; color:var(--yj-muted); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-toast { position:absolute; z-index:3; right:20px; bottom:72px; left:20px; display:none; padding:12px 13px; color:var(--yj-lime-ink); border-radius:14px; background:var(--yj-lime); font-size:12px; font-weight:600; }
+    #yueji-complete-demo .yj-toast.is-visible { display:block; }
+    #yueji-complete-demo .yj-me-item { display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid var(--yj-line); color:var(--yj-ink); font-size:13px; }
+    #yueji-complete-demo button.yj-me-item { width:100%; background:transparent; cursor:pointer; font:inherit; }
+    #yueji-complete-demo .yj-me-item span { color:var(--yj-muted); font-size:11px; }
+    #yueji-complete-demo .yj-profile { display:flex; gap:13px; align-items:center; margin:21px 0 8px; padding:15px; border:1px solid var(--yj-line); border-radius:21px; background:linear-gradient(122deg,rgba(216,251,98,.12),rgba(216,208,255,.09)); }
+    #yueji-complete-demo .yj-avatar { display:grid; place-items:center; width:47px; height:47px; flex:none; color:#283018; border-radius:50%; background:var(--yj-lime); font-size:18px; }
+    #yueji-complete-demo .yj-profile strong { display:block; color:var(--yj-ink); font-size:14px; font-weight:500; }
+    #yueji-complete-demo .yj-profile span { display:block; margin-top:4px; color:var(--yj-muted); font-size:10px; }
+    #yueji-complete-demo .yj-me-section { margin:24px 0 6px; color:var(--yj-lilac); font-size:10px; font-weight:600; letter-spacing:.05em; }
+    #yueji-complete-demo .yj-resume { margin-top:17px; padding:14px; border:1px solid rgba(216,251,98,.28); border-radius:18px; background:rgba(216,251,98,.07); }
+    #yueji-complete-demo .yj-resume strong { display:block; color:#e7f6bc; font-size:13px; font-weight:500; }
+    #yueji-complete-demo .yj-resume span { display:block; margin-top:5px; color:var(--yj-muted); font-size:11px; line-height:1.5; }
+    #yueji-complete-demo .yj-resume.yj-resume-compact { margin:0 0 12px; padding:11px 13px; }
+    #yueji-complete-demo .yj-resume-compact > span { margin:0; color:#dfe8c1; font-size:11px; line-height:1.45; }
+    #yueji-complete-demo .yj-resume-actions { display:flex; gap:8px; margin-top:10px; }
+    #yueji-complete-demo .yj-resume-actions .yj-secondary { flex:1; width:auto; margin:0; padding:8px 6px; border-radius:11px; background:rgba(255,255,255,.035); font-size:10px; }
+    #yueji-complete-demo .yj-resume-actions .yj-secondary:first-child { color:#dbeeb1; border:1px solid rgba(216,251,98,.22); }
+    #yueji-complete-demo .yj-confirm { position:absolute; z-index:8; inset:0; display:grid; place-items:center; padding:24px; background:rgba(4,6,5,.42); backdrop-filter:blur(9px); }
+    #yueji-complete-demo .yj-confirm-box { width:min(100%,278px); padding:20px; border:1px solid rgba(255,255,255,.17); border-radius:22px; background:linear-gradient(135deg,rgba(49,55,50,.76),rgba(20,23,21,.74)); box-shadow:0 18px 44px rgba(0,0,0,.28); backdrop-filter:blur(18px); }
+    #yueji-complete-demo .yj-confirm-box p { margin:0; color:var(--yj-ink); text-align:center; font-size:14px; }
+    #yueji-complete-demo .yj-confirm-box button { width:100%; margin-top:15px; padding:12px; color:var(--yj-lime-ink); border:0; border-radius:15px; background:var(--yj-lime); cursor:pointer; font-size:12px; font-weight:600; }
+    #yueji-complete-demo .yj-fluid-canvas { position:absolute; inset:0; z-index:10; width:100%; height:100%; pointer-events:none; }
+    #yueji-complete-demo .yj-fluid-canvas.is-splash { z-index:0; opacity:0; animation:yj-splash-fade 1.2s ease-out both; }
+    #yueji-complete-demo .yj-splash { position:relative; z-index:2; min-height:678px; overflow:hidden; padding:37px 23px 27px; color:#f7f7eb; background:linear-gradient(180deg,rgba(5,10,9,.18),rgba(4,8,7,.18) 50%,rgba(5,8,7,.67)); }
+    #yueji-complete-demo .yj-splash::before { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(180deg,rgba(5,11,9,.04) 12%,rgba(8,12,10,.13) 44%,rgba(4,7,6,.78) 100%); }
+    #yueji-complete-demo .yj-splash-header { display:flex; justify-content:space-between; align-items:center; color:rgba(247,247,235,.84); font-size:10px; letter-spacing:.12em; }
+    #yueji-complete-demo .yj-splash-symbol { display:grid; place-items:center; width:31px; height:31px; color:#102018; border-radius:45% 55% 52% 48% / 57% 42% 58% 43%; background:var(--yj-lime); font-size:16px; letter-spacing:0; }
+    #yueji-complete-demo .yj-splash-content { display:flex; flex-direction:column; align-items:center; margin-top:136px; text-align:center; animation:yj-splash-rise 1.15s ease-out .35s both; }
+    #yueji-complete-demo .yj-splash-title { display:block; width:100%; margin:0; padding:0 10px 3px; overflow:visible; color:transparent; white-space:nowrap; background:linear-gradient(105deg,#fff8e7 6%,#d9d2ff 51%,#d9f2a5 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; font-family:"Iowan Old Style",Georgia,"Times New Roman","Songti SC",serif; font-size:58px; font-style:italic; font-weight:400; line-height:1.05; letter-spacing:-.07em; transform:none; filter:none; }
+    #yueji-complete-demo .yj-splash-copy { margin:47px 0 0; color:rgba(249,249,240,.80); font-size:11px; line-height:1.7; }
+    #yueji-complete-demo .yj-splash-enter { display:block; width:145px; margin:47px auto 0; padding:12px 11px; color:#1e2618; border:0; border-radius:48% 52% 43% 57% / 55% 43% 57% 45%; background:var(--yj-lime); cursor:pointer; font-size:12px; font-weight:600; }
+    @keyframes yj-breathe { 0%,100% { transform:scale(.88); opacity:.72; } 50% { transform:scale(1.08); opacity:1; } }
+    @keyframes yj-splash-fade { from { opacity:0; } to { opacity:1; } }
+    @keyframes yj-splash-rise { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes yj-hero-drift { from { transform:scale(1) translate3d(-1%,-1%,0); } to { transform:scale(1.08) translate3d(2%,2%,0); } }
+    @media (prefers-reduced-motion:reduce) { #yueji-complete-demo .yj-orb,#yueji-complete-demo .yj-fluid-canvas.is-splash,#yueji-complete-demo .yj-splash-content,#yueji-complete-demo .yj-today-hero::before { animation:none; } #yueji-complete-demo .yj-fluid-canvas.is-splash { opacity:1; } }
+    @media (max-width:420px) { #yueji-complete-demo .yj-stage { padding:0; } #yueji-complete-demo .yj-phone { border-radius:26px; } #yueji-complete-demo .yj-shell { min-height:0; } #yueji-complete-demo .yj-screen { min-height:640px; } }
+  </style>
+
+  <div class="yj-stage"><div class="yj-phone"><div class="yj-shell">
+    <div class="yj-island" aria-hidden="true"></div><div class="yj-status"><span>9:41</span><span>▮▮▮　◒　▰</span></div>
+    <canvas class="yj-fluid-canvas" aria-hidden="true"></canvas>
+    <main data-app aria-live="polite"></main>
+    <div class="yj-toast" role="status"></div>
+  </div></div></div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('yueji-complete-demo');
+      const app = root.querySelector('[data-app]');
+      const toast = root.querySelector('.yj-toast');
+      const phone = root.querySelector('.yj-phone');
+      const fluid = (() => {
+        const canvas = root.querySelector('.yj-fluid-canvas');
+        const context = canvas.getContext('2d');
+        const palettes = [
+          {base:'#153f38', pools:[[.18,.18,.54,'#f1c6aa'],[.74,.18,.46,'#6f8262'],[.64,.72,.62,'#3c8272'],[.20,.82,.40,'#9bb18b']]},
+          {base:'#21383e', pools:[[.75,.13,.56,'#d5e39a'],[.21,.33,.61,'#ba8c78'],[.66,.68,.60,'#407e88'],[.23,.77,.46,'#789a77']]},
+          {base:'#2a3138', pools:[[.18,.18,.48,'#d7d4ef'],[.78,.32,.62,'#b38a73'],[.58,.78,.50,'#639086'],[.23,.69,.38,'#e2c796']]},
+          {base:'#274137', pools:[[.76,.18,.52,'#eee4a8'],[.22,.25,.64,'#8ca794'],[.69,.73,.60,'#477a69'],[.18,.82,.44,'#d39c86']]},
+          {base:'#183b43', pools:[[.19,.16,.55,'#e8b69e'],[.79,.27,.57,'#7da3a2'],[.59,.72,.64,'#4f7184'],[.19,.80,.42,'#b6c883']]}
+        ];
+        const ripples = [];
+        let width = 0; let height = 0; let dpr = 1; let splash = true;
+        canvas.classList.add('is-splash');
+        const resize = () => {
+          const bounds = phone.getBoundingClientRect();
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = Math.max(1, bounds.width); height = Math.max(1, bounds.height);
+          canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+          canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        const drawPalette = (palette, alpha, now) => {
+          context.save(); context.globalAlpha = alpha; context.fillStyle = palette.base; context.fillRect(0, 0, width, height);
+          context.filter = 'blur(24px) saturate(.9)';
+          palette.pools.forEach((pool, index) => {
+            const driftX = Math.sin(now / 3800 + index * 1.8) * width * .04;
+            const driftY = Math.cos(now / 4300 + index * 1.2) * height * .035;
+            const x = width * pool[0] + driftX; const y = height * pool[1] + driftY; const radius = Math.max(width, height) * pool[2];
+            const gradient = context.createRadialGradient(x, y, 0, x, y, radius);
+            gradient.addColorStop(0, pool[3]); gradient.addColorStop(.42, `${pool[3]}b8`); gradient.addColorStop(1, `${pool[3]}00`);
+            context.fillStyle = gradient; context.beginPath(); context.ellipse(x, y, radius * 1.04, radius * .72, (index - 2) * .24, 0, Math.PI * 2); context.fill();
+          });
+          context.filter = 'none'; context.globalAlpha = .15 * alpha; context.strokeStyle = '#ecf4df'; context.lineWidth = 1;
+          for (let row = 0; row < 7; row += 1) {
+            const y = height * (.19 + row * .11); context.beginPath();
+            for (let x = -20; x <= width + 20; x += 9) {
+              const wave = Math.sin(x / 38 + now / 2100 + row) * 5 + Math.cos(x / 83 - now / 2700) * 3;
+              if (x === -20) context.moveTo(x, y + wave); else context.lineTo(x, y + wave);
+            }
+            context.stroke();
+          }
+          context.restore();
+        };
+        const drawRipples = (now) => {
+          for (let index = ripples.length - 1; index >= 0; index -= 1) {
+            const ripple = ripples[index]; const age = now - ripple.started;
+            if (age > 1450) { ripples.splice(index, 1); continue; }
+            const progress = age / 1450; const baseRadius = 8 + Math.pow(progress, .72) * Math.max(width, height) * .74;
+            for (let ring = 0; ring < 3; ring += 1) {
+              const offset = ring * 19; const radius = baseRadius - offset;
+              if (radius <= 0) continue;
+              context.save(); context.globalAlpha = Math.max(0, (.52 - ring * .11) * (1 - progress));
+              context.strokeStyle = ring === 0 ? '#e7ffad' : '#b9e8d5'; context.lineWidth = ring === 0 ? 1.25 : .75;
+              context.beginPath(); context.ellipse(ripple.x, ripple.y, radius, radius * .43, -.12, 0, Math.PI * 2); context.stroke(); context.restore();
+            }
+          }
+        };
+        const paint = (now) => {
+          context.setTransform(dpr, 0, 0, dpr, 0, 0); context.clearRect(0, 0, width, height);
+          if (splash) {
+            const cycle = 10500; const progress = (now % cycle) / cycle; const index = Math.floor(now / cycle) % palettes.length;
+            drawPalette(palettes[index], 1, now);
+            if (progress > .57) drawPalette(palettes[(index + 1) % palettes.length], (progress - .57) / .43, now);
+          }
+          drawRipples(now); window.requestAnimationFrame(paint);
+        };
+        const observer = new ResizeObserver(resize); observer.observe(phone); resize(); window.requestAnimationFrame(paint);
+        return { setSplash: (next) => { if (splash === next) return; splash = next; canvas.classList.toggle('is-splash', splash); }, ripple: (x, y) => { ripples.push({x, y, started: performance.now()}); if (ripples.length > 10) ripples.shift(); } };
+      })();
+      const lake = (() => {
+        let canvas = null; let context = null; let frame = 0; let observer = null; let width = 0; let height = 0; let dpr = 1; let explorations = 0;
+        const resize = () => {
+          const bounds = canvas.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = Math.max(1, bounds.width); height = Math.max(1, bounds.height);
+          canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); context.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        const draw = (now) => {
+          if (!canvas || !context) return;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0); context.clearRect(0, 0, width, height);
+          const horizon = height * .42;
+          const sky = context.createLinearGradient(0, 0, 0, horizon);
+          sky.addColorStop(0, '#243a55'); sky.addColorStop(.58, '#725464'); sky.addColorStop(1, '#b48775'); context.fillStyle = sky; context.fillRect(0, 0, width, horizon);
+          const haze = context.createRadialGradient(width * .72, horizon * .55, 0, width * .72, horizon * .55, width * .43);
+          haze.addColorStop(0, 'rgba(255,209,157,.46)'); haze.addColorStop(1, 'rgba(255,209,157,0)'); context.fillStyle = haze; context.fillRect(0, 0, width, horizon);
+          const water = context.createLinearGradient(0, horizon, 0, height);
+          water.addColorStop(0, '#35505a'); water.addColorStop(.28, '#183943'); water.addColorStop(1, '#0c1c25'); context.fillStyle = water; context.fillRect(0, horizon, width, height - horizon);
+          for (let row = 0; row < 35; row += 1) {
+            const y = horizon + row * (height - horizon) / 35; const wave = Math.sin(now / 1600 + row * .79) * 5;
+            context.beginPath(); context.globalAlpha = .12 - row * .0023; context.strokeStyle = row < 8 ? '#ffd8ae' : '#a1d6c0'; context.lineWidth = row % 6 === 0 ? 1.2 : .55;
+            for (let x = -14; x < width + 14; x += 16) { const bend = Math.sin(x / 34 + now / 1300 + row) * (1.8 + row * .04); if (x === -14) context.moveTo(x, y + wave + bend); else context.lineTo(x, y + wave + bend); }
+            context.stroke();
+          }
+          context.globalAlpha = 1;
+          if (explorations) {
+            const strength = Math.min(1, explorations / 12); const radius = width * (.18 + strength * .46);
+            const glow = context.createRadialGradient(width * .53, horizon + height * .30, 0, width * .53, horizon + height * .30, radius);
+            glow.addColorStop(0, `rgba(216,251,98,${.11 + strength * .16})`); glow.addColorStop(.38, `rgba(173,231,157,${.05 + strength * .11})`); glow.addColorStop(1, 'rgba(173,231,157,0)');
+            context.fillStyle = glow; context.fillRect(0, horizon, width, height - horizon);
+          }
+          for (let index = 0; index < Math.min(explorations, 30); index += 1) {
+            const x = width * (.10 + ((index * 73) % 83) / 100); const y = horizon + height * (.13 + ((index * 47) % 54) / 100);
+            const pulse = .55 + Math.sin(now / (480 + (index % 5) * 95) + index * 1.9) * .36; const radius = 3.3 + pulse * 3.3;
+            const bloom = context.createRadialGradient(x, y, 0, x, y, 18 + pulse * 16);
+            bloom.addColorStop(0, `rgba(239,255,160,${.84 * pulse})`); bloom.addColorStop(.17, `rgba(216,251,98,${.42 * pulse})`); bloom.addColorStop(1, 'rgba(216,251,98,0)'); context.fillStyle = bloom; context.beginPath(); context.arc(x, y, 22 + pulse * 12, 0, Math.PI * 2); context.fill();
+            context.fillStyle = `rgba(249,255,212,${.68 + pulse * .28})`; context.beginPath(); context.arc(x, y, radius * .35, 0, Math.PI * 2); context.fill();
+            context.strokeStyle = `rgba(216,251,98,${.22 * pulse})`; context.lineWidth = .8; context.beginPath(); context.ellipse(x, y + 18 + pulse * 7, 10 + pulse * 13, 1.6 + pulse * 2.2, 0, 0, Math.PI * 2); context.stroke();
+          }
+          frame = window.requestAnimationFrame(draw);
+        };
+        const stop = () => { if (frame) window.cancelAnimationFrame(frame); frame = 0; if (observer) observer.disconnect(); observer = null; canvas = null; context = null; };
+        const start = (count) => { stop(); canvas = root.querySelector('[data-lake]'); if (!canvas) return; context = canvas.getContext('2d'); explorations = count; resize(); observer = new ResizeObserver(resize); observer.observe(canvas); frame = window.requestAnimationFrame(draw); };
+        return {start, stop};
+      })();
+      const tagPool = [
+        {name:'心跳好像快了一点', group:'body'}, {name:'呼吸有点变重了', group:'body'}, {name:'身体有点热起来了', group:'body'}, {name:'感到发热口渴', group:'body'}, {name:'我觉得很满足', group:'body'}, {name:'整个人都放松了', group:'body'}, {name:'还有点紧绷，没放开', group:'body'},
+        {name:'有点心动', group:'emotion'}, {name:'有点兴奋', group:'emotion'}, {name:'有点害羞', group:'emotion'}, {name:'很安心', group:'emotion'}, {name:'有点好奇、新奇', group:'emotion'}, {name:'和平常的触摸没区别', group:'emotion'}, {name:'有点紧张', group:'emotion'},
+        {name:'想被碰那里', group:'desire'}, {name:'想被碰得更久一点', group:'desire'}, {name:'想继续，不想停', group:'desire'}, {name:'想更亲密', group:'desire'}, {name:'想慢一点', group:'desire'}, {name:'想快一点', group:'desire'}, {name:'想换一种试试', group:'desire'},
+        {name:'喜欢这种节奏', group:'preference'}, {name:'喜欢这个位置', group:'preference'}, {name:'喜欢这种力度', group:'preference'}, {name:'喜欢有声音陪着', group:'preference'}, {name:'更喜欢安静', group:'preference'}, {name:'发现新的敏感地带', group:'preference'}, {name:'还不确定，想再试试', group:'preference'}
+      ];
+      const tagsFor = {
+        shallow:['整个人都放松了','还有点紧绷，没放开','有点好奇、新奇','喜欢这种节奏','发现新的敏感地带','还不确定，想再试试'],
+        mid:['心跳好像快了一点','身体有点热起来了','有点心动','有点兴奋','有点害羞','想更亲密','喜欢这个位置','想换一种试试'],
+        deep:['呼吸有点变重了','感到发热口渴','我觉得很满足','和平常的触摸没区别','想继续，不想停','想慢一点','想快一点','喜欢这种力度'],
+        communication:['有点害羞','很安心','有点紧张','想更亲密','还不确定，想再试试'],
+        sync:['呼吸有点变重了','整个人都放松了','有点心动','很安心','想被碰得更久一点','想继续，不想停','喜欢这种节奏']
+      };
+      const lines = [
+        {id:'sensory', icon:'〰', label:'感官唤醒', group:'单人线 · 懂自己', note:'从呼吸、温度和熟悉的味道开始，留意身体怎么回应。', activities:[
+          {id:'breath-fingertips', title:'呼吸和指尖', duration:'约 3 分钟', depth:'shallow', steps:['把手放在肚子上，闭上眼睛，感受吸气时掌心的起伏','让指尖从手腕慢慢滑到锁骨，留意哪里想多停一会','那一处更像放松，还是一点点好奇']},
+          {id:'warm-cool', title:'一冷一暖', duration:'约 3 分钟', depth:'shallow', steps:['找找手边的温水或微凉的东西，没有也可以换一题','先把温的贴上手臂内侧，停几秒，看看是否想多留一会','再换成凉的，留意哪一种让皮肤更有回应']},
+          {id:'familiar-scent', title:'熟悉的味道', duration:'约 3 分钟', depth:'shallow', steps:['闻一闻衣领或身上一种熟悉的味道','留意它带来的画面、一个人，或一点点更快的心跳','此刻更愿意留住味道、画面，还是那一点点心跳']}
+        ]},
+        {id:'preference', icon:'✦', label:'心动与欲望', group:'单人线 · 懂自己', note:'让一个想靠近的念头先停下来，看看身体想告诉你什么。', activities:[
+          {id:'private-detail', title:'留住一个秘密', duration:'约 3 分钟', depth:'mid', steps:['有没有一个私密的癖好，想说出来却一直不好意思说','不用解释，也不用想得完整，留意最想留下的细节','让那个细节在心里停一会，看看身体或心里的变化']},
+          {id:'neck-warmth', title:'后颈的温度', duration:'约 3 分钟', depth:'mid', steps:['坐着或躺着，让一只手轻轻覆在后颈，感受掌心的温度','用指腹从后颈往肩膀和上背慢慢带过，留意哪里想再慢一点','来到愿意停留的地方，画一个很小的圈，停在这里也可以']},
+          {id:'body-midline', title:'沿着中线', duration:'约 3 分钟', depth:'mid', steps:['找到一个舒服的姿势，让呼吸慢下来','把一根手指放在锁骨中间，沿身体中线慢慢向下，在肚脐上方停住','留意一点痒、热，或什么都没有，无论哪一种都可以']},
+          {id:'curious-way', title:'想试的方式', duration:'约 3 分钟', depth:'mid', steps:['想起一个有一点好奇，却从没认真尝试过的动作或方式','不用真的做，也不用现在决定，让手掌在手臂内侧、腰侧或安全的地方缓缓移过一次','这一次移动里，更在意速度、位置，还是想再想一想']},
+          {id:'mirror-pause', title:'镜子里的停留', duration:'约 3 分钟', depth:'mid', steps:['如果愿意，站在镜前慢慢褪去衣物','不用调整姿势，也不用找最好看的角度，留意目光自然落在哪里','有没有一个地方，愿意让目光多停一会']},
+          {id:'remember-closeness', title:'回想一次靠近', duration:'约 3 分钟', depth:'mid', steps:['想起最近一次独自靠近自己，身体也愿意回应的时刻','不用记得完整，留意呼吸、温度、触感，或哪个想慢一点的瞬间','如果什么都没有想起，就从此刻的一次呼吸开始']}
+        ]},
+        {id:'ambience', icon:'☾', label:'愉悦探索', group:'单人线 · 懂自己', note:'不追求结果，只留意身体想继续、想慢一点或想停下的地方。', activities:[
+          {id:'slowly-down', title:'慢慢往下', duration:'约 3 分钟', depth:'deep', steps:['找一段不被打扰的时间，躺下闭上眼，让手顺着身体慢慢往下走','从胸和腰慢慢往更私密的地方，留意哪里想再多停一会','那份还想继续，更像来自位置、速度，还是此刻的心情']},
+          {id:'ten-second-difference', title:'十秒的不同', duration:'约 3 分钟', depth:'deep', steps:['把手放在一个让你舒服的地方，很慢很轻地感受十秒','再换成快一点、重一点的节奏，感受十秒','留意哪一种更有感觉，也可以只记得有一点不同']},
+          {id:'feel-not-result', title:'只追感觉', duration:'约 3 分钟', depth:'deep', steps:['今天不追求结果，只追求感觉，从喜欢的方式开始','慢慢进入，不催自己，留意更接近舒服还是想继续','如果两种都不是，身体想慢一点、换一种，还是先停在这里']},
+          {id:'from-outside', title:'从外围开始', duration:'约 3 分钟', depth:'deep', steps:['从最外围开始，脖子、锁骨、胸，再慢慢往更私密的地方','每碰一处，心里分一分，是有点感觉还是很想继续','哪个很想继续的地方，愿意为下次留下一个线索']},
+          {id:'let-sound', title:'让声音出来', duration:'约 3 分钟', depth:'deep', steps:['如果喉咙里冒出一点声音，愿意先听听它','不用刻意发出什么，让它自然出来','出声之后，留意感觉有没有一点不同或更强烈']}
+        ]},
+        {id:'communication', icon:'💬', label:'说出口', group:'双人线 · 连接彼此', note:'把喜欢、边界和想尝试的事，说成彼此都能听懂的一句。', partner:true, activities:[
+          {id:'say-preference', title:'说出喜欢', duration:'约 3 分钟', steps:['想一想更喜欢怎样被触碰，慢慢告诉对方一句','让对方用自己的话复述一遍，听听像不像你想说的','说出口之后，留意心里或身体有没有轻一点']},
+          {id:'pause-word', title:'约定暂停', duration:'约 3 分钟', steps:['一起约定一个暂停词，比如抱抱我','想一想什么时候会想用这个信号，不必说得很完整','想到任何时刻都能喊停，留意是否更安心一点']},
+          {id:'feel-cared-for', title:'被好好照顾', duration:'约 3 分钟', steps:['想一想对方做了什么，让你觉得被爱和被照顾','试着说给 TA 听，不完整也没有关系','听到回应时，留意身体哪里悄悄松了一下']},
+          {id:'tonight-invitation', title:'今晚想试', duration:'约 3 分钟', steps:['今晚，有没有一点想试的事','试着说，今晚我有点想试试____，你愿意陪我吗','被认真回应的那一刻，留意是什么感觉']},
+          {id:'clear-boundary', title:'说清边界', duration:'约 3 分钟', steps:['想一想哪一两件事，暂时还不想碰','试着告诉对方，也让 TA 复述，不用追问为什么','边界被尊重时，更想靠近还是想逃']},
+          {id:'three-lights', title:'三个信号', duration:'约 3 分钟', steps:['把暂停词当红灯，再加两个信号，黄灯是慢一点，绿灯是继续','想一想最简单的一次尝试里，什么时候会想用黄灯','任何时刻喊停都被鼓励，留意身体有什么感觉']}
+        ]},
+        {id:'sync', icon:'🌙', label:'一起', group:'双人线 · 连接彼此', note:'在安全和确认里，一起感受彼此的节奏。', partner:true, activities:[
+          {id:'forehead-close', title:'额头相抵', duration:'约 3 分钟', steps:['面对面坐下，让额头轻轻相抵','闭上眼，感受对方的呼吸，留意自己的呼吸是否也慢下来','这一刻，是否感觉和对方更靠近一点']},
+          {id:'choose-the-rhythm', title:'谁来掌握', duration:'约 3 分钟', steps:['想一想更享受主动掌握节奏，还是被照顾','不急着给答案，留意哪一种画面让身体先有一点回应','如果这一次由你选，想先试哪一种']},
+          {id:'five-minutes-feel', title:'五分钟感受', duration:'约 5 分钟', steps:['接下来五分钟，你只负责感受，TA 只负责观察和回应','不用做得很好，留意哪一个瞬间最让你安心地待着','五分钟后，身体想继续、想换一下，还是想先抱一抱']},
+          {id:'fingertips-ear', title:'指尖到耳后', duration:'约 3 分钟', steps:['让 TA 用指尖从手腕极慢地走到耳后','留意 TA 走到哪一处时，呼吸突然变重','那一处想让 TA 停久一点，还是继续往前']},
+          {id:'ear-praise', title:'耳边的赞美', duration:'约 3 分钟', steps:['试着在对方耳边说一句具体的赞美，你____的样子让我心动','说的人和听的人，谁更紧张','这句话想让它再轻一点，还是再停留一会']},
+          {id:'gentle-instructions', title:'轻轻的指令', duration:'约 3 分钟', steps:['用约好的暂停词，先确认随时都可以停','让 TA 下两三个很轻的指令，全程问可以吗，舒服吗','被掌控的时候，更想顺从还是想喊停']},
+          {id:'land-together', title:'一起落地', duration:'约 3 分钟', steps:['结束后抱一抱，帮忙擦拭，再换身舒服的衣服','留意刚才哪个瞬间，最让你觉得被爱','这一刻更想说一句话，还是安静地待一会']}
+        ]}
+      ];
+      const allActivities = lines.flatMap((line) => line.activities.map((activity) => ({...activity, line}))); 
+      const musicTracks = [
+        {id:'off', label:'暂不播放', note:'进入体验时保持安静'},
+        {id:'water', label:'水滴声', note:'细小水滴与空气感'},
+        {id:'drum', label:'空灵鼓声', note:'很轻的低频脉冲'},
+        {id:'night', label:'夜晚琴音', note:'稀疏、明亮的和声'},
+        {id:'quiet', label:'安静琴音', note:'缓慢的暖色音符'}
+      ];
+      const voiceStyles = [
+        {id:'soft', label:'温柔', note:'慢一点，轻一点'},
+        {id:'calm', label:'沉静', note:'更低、更稳的语气'},
+        {id:'clear', label:'清亮', note:'更清晰的节奏'}
+      ];
+      const readSetting = (key, fallback) => { try { return window.localStorage.getItem(key) || fallback; } catch (_) { return fallback; } };
+      const saveSetting = (key, value) => { try { window.localStorage.setItem(key, value); } catch (_) {} };
+      const musicLabel = (id) => (musicTracks.find((item) => item.id === id) || musicTracks[0]).label;
+      const voiceLabel = (id) => (voiceStyles.find((item) => item.id === id) || voiceStyles[0]).label;
+      const loadLastIncomplete = () => { try { return JSON.parse(window.localStorage.getItem('beforecare-last-incomplete') || 'null'); } catch (_) { return null; } };
+      const state = {screen:'splash', hasAcknowledged:(() => { try { return window.localStorage.getItem('beforecare-privacy-known') === 'true'; } catch (_) { return false; } })(), privacyKnown:false, lineId:'sensory', activityId:'breath-fingertips', step:0, selectedTags:[], signals:[], notes:[], sharedEntries:[], explorations:[], interruptions:[], hiddenLines:[], homeLine:1, depthHistory:[], selectedOption:'', freeNote:'', shareMode:'private', voiceOn:false, voiceStyle:readSetting('beforecare-voice-style','soft'), musicTrack:readSetting('beforecare-music-track','off'), paused:false, stepTimerEndsAt:0, stepTimerDuration:0, pausedRemaining:0, pendingDeleteSignal:null, lastIncomplete:loadLastIncomplete(), resumeDismissed:false, aftercareWaiting:false, aftercareReady:false};
+      let timerTicker = 0;
+      let aftercareTicker = 0;
+      const lineFor = () => lines.find((line) => line.id === state.lineId) || lines[0];
+      const featured = () => {
+        const candidates = visibleLines().filter((line) => !line.partner || partnerUnlocked());
+        return candidates[state.homeLine % candidates.length] || candidates[0] || lines[0];
+      };
+      const toneClass = (line) => `yj-tone-${line.id}`;
+      const current = () => allActivities.find((activity) => activity.id === state.activityId) || allActivities[0];
+      const audio = (() => {
+        const AudioCtor = window.AudioContext || window.webkitAudioContext;
+        let context = null; let musicBus = null; let activeTrack = ''; let musicTimer = 0; let previewTimer = 0; let nodes = []; let utterance = null;
+        const ensureContext = () => {
+          if (!AudioCtor) return null;
+          if (!context) { context = new AudioCtor(); musicBus = context.createGain(); musicBus.gain.value = .48; musicBus.connect(context.destination); }
+          if (context.state === 'suspended') context.resume();
+          return context;
+        };
+        const stopNodes = () => { nodes.forEach((node) => { try { node.stop(); } catch (_) {} }); nodes = []; };
+        const tone = (frequency, at, volume, duration, type = 'sine') => {
+          if (!context || !musicBus) return;
+          const oscillator = context.createOscillator(); const gain = context.createGain();
+          oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, at);
+          gain.gain.setValueAtTime(.0001, at); gain.gain.exponentialRampToValueAtTime(Math.max(.0002, volume), at + .025); gain.gain.exponentialRampToValueAtTime(.0001, at + duration);
+          oscillator.connect(gain); gain.connect(musicBus); oscillator.start(at); oscillator.stop(at + duration + .04); nodes.push(oscillator);
+        };
+        const noiseBed = (cutoff, volume) => {
+          if (!context || !musicBus) return;
+          const buffer = context.createBuffer(1, context.sampleRate * 2, context.sampleRate); const data = buffer.getChannelData(0);
+          for (let index = 0; index < data.length; index += 1) data[index] = (Math.random() * 2 - 1) * .26;
+          const source = context.createBufferSource(); const filter = context.createBiquadFilter(); const gain = context.createGain();
+          source.buffer = buffer; source.loop = true; filter.type = 'lowpass'; filter.frequency.value = cutoff; gain.gain.value = volume;
+          source.connect(filter); filter.connect(gain); gain.connect(musicBus); source.start(); nodes.push(source);
+        };
+        const clearMusic = () => { window.clearTimeout(musicTimer); window.clearTimeout(previewTimer); musicTimer = 0; previewTimer = 0; stopNodes(); activeTrack = ''; };
+        const loopWater = () => {
+          if (activeTrack !== 'water' || !context) return;
+          const now = context.currentTime + .05; tone(720 + Math.random() * 900, now, .042, .54); if (Math.random() > .48) tone(520 + Math.random() * 720, now + .19, .026, .44);
+          musicTimer = window.setTimeout(loopWater, 940 + Math.random() * 990);
+        };
+        const loopDrum = () => {
+          if (activeTrack !== 'drum' || !context) return;
+          const now = context.currentTime + .05; tone(104, now, .095, 1.8); tone(208, now + .02, .025, 1.18); tone(156, now + .93, .033, 1.36);
+          musicTimer = window.setTimeout(loopDrum, 2850);
+        };
+        const loopNight = () => {
+          if (activeTrack !== 'night' || !context) return;
+          const now = context.currentTime + .05; [293.66,369.99,440].forEach((frequency, index) => tone(frequency, now + index * .32, .052, 2.6));
+          musicTimer = window.setTimeout(loopNight, 4300);
+        };
+        const loopQuiet = () => {
+          if (activeTrack !== 'quiet' || !context) return;
+          const now = context.currentTime + .05; [261.63,329.63,392,329.63].forEach((frequency, index) => tone(frequency, now + index * .58, .045, 2.9));
+          musicTimer = window.setTimeout(loopQuiet, 4550);
+        };
+        const startMusic = (track, preview = false) => {
+          if (track === 'off') { clearMusic(); return false; }
+          const nextContext = ensureContext(); if (!nextContext) return false;
+          if (activeTrack !== track) {
+            clearMusic(); activeTrack = track;
+            if (track === 'water') { noiseBed(1550, .045); loopWater(); }
+            if (track === 'drum') { noiseBed(780, .022); loopDrum(); }
+            if (track === 'night') { noiseBed(1200, .015); loopNight(); }
+            if (track === 'quiet') { noiseBed(900, .011); loopQuiet(); }
+          }
+          if (preview) { window.clearTimeout(previewTimer); previewTimer = window.setTimeout(clearMusic, 9000); }
+          return true;
+        };
+        const stopVoice = () => { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); utterance = null; if (musicBus && context) musicBus.gain.setTargetAtTime(.48, context.currentTime, .12); };
+        const voiceFor = (style) => {
+          if (!('speechSynthesis' in window)) return null;
+          const candidates = window.speechSynthesis.getVoices().filter((voice) => /^zh/i.test(voice.lang)); if (!candidates.length) return null;
+          const index = style === 'calm' ? Math.min(1, candidates.length - 1) : style === 'clear' ? Math.min(2, candidates.length - 1) : 0;
+          return candidates[index];
+        };
+        const speak = (text, style) => {
+          if (!('speechSynthesis' in window) || !text) return false;
+          stopVoice(); const next = new SpeechSynthesisUtterance(text.replace(/[“”]/g, '')); const settings = style === 'calm' ? {rate:.72, pitch:.88} : style === 'clear' ? {rate:.88, pitch:1.08} : {rate:.78, pitch:1.02};
+          next.lang = 'zh-CN'; next.rate = settings.rate; next.pitch = settings.pitch; next.volume = .92; const voice = voiceFor(style); if (voice) next.voice = voice;
+          utterance = next; next.onstart = () => { if (musicBus && context) musicBus.gain.setTargetAtTime(.12, context.currentTime, .10); };
+          next.onend = next.onerror = () => { if (utterance !== next) return; utterance = null; if (musicBus && context) musicBus.gain.setTargetAtTime(.48, context.currentTime, .16); };
+          window.speechSynthesis.speak(next); return true;
+        };
+        return {startMusic, stopMusic:clearMusic, speak, stopVoice, supportsVoice:() => 'speechSynthesis' in window};
+      })();
+      const reflectionTags = () => {
+        const activity = current();
+        const key = activity.line.partner ? activity.line.id : activity.depth;
+        return tagPool.filter((tag) => (tagsFor[key] || tagsFor.shallow).includes(tag.name));
+      };
+      const partnerUnlocked = () => state.explorations.some((item) => !item.partner);
+      const visibleLines = () => lines.filter((line) => !state.hiddenLines?.includes(line.id));
+      const rememberDepth = (activity) => {
+        if (!activity.line.partner && activity.depth) state.depthHistory = [...state.depthHistory, activity.depth].slice(-2);
+      };
+      const chooseSoloActivity = (depth) => {
+        let candidates = allActivities.filter((activity) => !activity.line.partner);
+        if (depth) candidates = candidates.filter((activity) => activity.depth === depth);
+        else if (!state.depthHistory.length || state.depthHistory.every((item) => item === 'shallow')) candidates = candidates.filter((activity) => activity.depth !== 'shallow');
+        const weighted = candidates.flatMap((activity) => Array(activity.depth === 'shallow' ? 1 : 2).fill(activity));
+        return weighted[Math.floor(Math.random() * weighted.length)] || allActivities[0];
+      };
+      const chooseAnotherInLine = () => {
+        const candidates = current().line.activities.filter((activity) => activity.id !== current().id);
+        return candidates[Math.floor(Math.random() * candidates.length)] || current();
+      };
+      const escape = (value) => String(value).replace(/[&<>"]/g, (letter) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[letter]));
+      const nav = (active) => `<nav class="yj-nav" aria-label="主导航"><button type="button" data-nav="home" class="${active==='home'?'is-active':''}"><b>◒</b>今天</button><button type="button" data-nav="map" class="${active==='map'?'is-active':''}"><b>◉</b>地图</button><button type="button" data-nav="me" class="${active==='me'?'is-active':''}"><b>♙</b>我的</button></nav>`;
+      const screen = (content, active) => `<section class="yj-screen ${active ? 'has-nav' : ''}">${content}</section>${active ? nav(active) : ''}`;
+      const mapGroup = (title, icon, group, placeholder) => {
+        const tags = [...new Set(state.signals.filter((signal) => signal.group === group).map((signal) => signal.name))];
+        return `<div class="yj-map-block"><h2><b>${icon}</b>${title}</h2>${tags.length ? tags.map((tag) => `<span class="yj-chip">${escape(tag)}</span>`).join('') : `<span class="yj-empty">${placeholder}</span>`}</div>`;
+      };
+      const noteBlock = () => state.notes.length ? `<div class="yj-map-block"><h2><b>•</b>你写下的话</h2>${state.notes.map((note,index) => `<div class="yj-shared-entry"><strong>${escape(note.activity)}</strong><span>${escape(note.text)}</span><button type="button" class="yj-secondary" data-delete-note="${index}">删除这句</button></div>`).join('')}</div>` : '';
+      const sharedSummary = () => state.sharedEntries.length ? `<div class="yj-map-block"><h2><b>•</b>共同记下的</h2><p class="yj-empty">你们愿意留下的话，会放在这里。双方都可以改。</p><button type="button" class="yj-secondary" data-go="shared">查看并编辑</button></div>` : '';
+      const stepDuration = (activity) => {
+        const minutes = Number((activity.duration.match(/\d+/) || ['3'])[0]);
+        return Math.max(1, Math.round((minutes * 60) / activity.steps.length));
+      };
+      const startStepTimer = (activity) => { const seconds = Number(activity.timer) || 0; state.stepTimerDuration = seconds; state.pausedRemaining = 0; state.stepTimerEndsAt = seconds ? Date.now() + seconds * 1000 : 0; };
+      const stepProgress = () => {
+        if (!state.stepTimerDuration) return 0;
+        const remaining = state.paused ? state.pausedRemaining : Math.max(0, (state.stepTimerEndsAt - Date.now()) / 1000);
+        return Math.min(.999, Math.max(0, 1 - remaining / state.stepTimerDuration));
+      };
+      const syncTimer = () => {
+        window.clearInterval(timerTicker);
+        if (state.screen !== 'guide' || !state.stepTimerEndsAt || state.paused) return;
+        timerTicker = window.setInterval(() => {
+          const orb = root.querySelector('[data-orb]');
+          if (!orb) { window.clearInterval(timerTicker); return; }
+          if (Date.now() >= state.stepTimerEndsAt) {
+            if (state.step < current().steps.length - 1) { state.step += 1; startStepTimer(current()); }
+            else { state.stepTimerEndsAt = 0; state.selectedTags = []; state.screen = 'reflect'; }
+            render(); return;
+          }
+          orb.style.setProperty('--yj-progress', stepProgress().toFixed(4));
+          orb.setAttribute('aria-valuenow', String(Math.round(stepProgress() * 100)));
+        }, 1000);
+      };
+      const prototype = () => {
+        const real = state.signals.filter((signal) => signal.group !== 'none');
+        if (real.length < 3) return '';
+        const count = (group) => real.filter((signal) => signal.group === group).length;
+        const leading = count('body') >= count('emotion') && count('body') >= count('desire') && count('body') >= count('preference') ? '身体的' : count('emotion') >= count('desire') && count('emotion') >= count('preference') ? '心里的' : count('desire') >= count('preference') ? '想靠近的' : '正在形成的';
+        const title = real.length >= 10 ? `你的“${leading}”一面，正在逐渐清晰` : '你似乎更在意……';
+        const copy = leading === '身体的' ? '身体愿意回应的温度、触感和节奏。' : leading === '心里的' ? '那些让你心动、安心、好奇或紧张的时刻。' : leading === '想靠近的' ? '此刻想继续、想慢一点，或想更亲密的可能。' : '那些还想再试一次、慢慢被你认出来的偏好。';
+        const sub = real.length >= 20 ? '你不是一种固定的类型；你是多面的，也会一直变化。' : real.length >= 10 ? '这些线索只是慢慢浮现，不是给你下结论。' : '先不用急着命名，继续留意就好。';
+        return `<div class="yj-prototype"><strong>✦ ${title}</strong><br>${copy}<br><span>${sub}</span></div>`;
+      };
+      const render = () => {
+        const activity = current(); const line = lineFor();
+        lake.stop();
+        fluid.setSplash(state.screen === 'splash');
+        if (state.screen === 'guide') { if (state.musicTrack !== 'off') audio.startMusic(state.musicTrack); else audio.stopMusic(); } else { audio.stopMusic(); audio.stopVoice(); }
+        if (state.screen === 'splash') {
+          app.innerHTML = `<section class="yj-splash" aria-label="Beforecare 开屏"><div class="yj-splash-header"><span class="yj-splash-symbol">✦</span><span>PRIVATE, GENTLE, YOURS</span></div><div class="yj-splash-content"><p class="yj-splash-title">Beforecare</p><p class="yj-splash-copy">在亲密之前，了解自己多一点。<br>不需要准备好，只需要比上次多知道一点。</p><button type="button" class="yj-splash-enter" data-enter>开始探索</button></div></section>`;
+        } else if (state.screen === 'privacy') {
+          app.innerHTML = screen(`<div class="yj-privacy-mark">✦</div><h1>这里，只属于你。</h1><p class="yj-lede">你的每一次探索，都只对你自己可见。这里没有打分，没有评判，只有你慢慢发现自己的过程。</p><div class="yj-promise"><b>◉</b><div><strong>默认仅你可见</strong><span>每条线索都由你决定：仅自己可见、这次分享，或长期共享。</span></div></div><div class="yj-promise"><b>⌁</b><div><strong>分享前，仍然由你选择</strong><span>双人内容不会自动进入共同记录；什么时候分享、分享哪些、何时撤回，都由你决定。</span></div></div><label class="yj-check"><input type="checkbox" data-privacy-known ${state.privacyKnown?'checked':''}> 我已知悉</label><button type="button" class="yj-primary" data-acknowledge ${state.privacyKnown?'':'disabled'}>进入今天</button>`, false);
+        } else if (state.screen === 'home') {
+          const feature = featured();
+          app.innerHTML = screen(`<div class="yj-today-head"><p class="yj-kicker">TODAY / 今天</p><button type="button" class="yj-cycle" data-go="browse">看看所有方向</button></div>${state.lastIncomplete && !state.resumeDismissed ? `<div class="yj-resume yj-resume-compact"><span>上次停在「${escape(state.lastIncomplete.activity)}」 · 第 ${state.lastIncomplete.step} 步</span><div class="yj-resume-actions"><button type="button" class="yj-secondary" data-resume>继续上一次</button><button type="button" class="yj-secondary" data-dismiss-resume>暂时不用</button></div></div>` : ''}<button type="button" class="yj-today-hero ${toneClass(feature)}" data-feature><strong>${feature.label}</strong><p>${feature.note}</p><span class="yj-today-hint">点开，试试这一组　›</span></button><div class="yj-today-actions"><button type="button" data-surprise>✦　随便选一张</button><button type="button" data-cycle>换一个方向</button></div>`, 'home');
+        } else if (state.screen === 'browse') {
+          app.innerHTML = screen(`<button type="button" class="yj-back" data-go="home">‹ 返回今天</button><h1>想从哪里<br>开始试试？</h1>${visibleLines().map((item) => item.partner && !partnerUnlocked() ? `<button type="button" class="yj-browse-item ${toneClass(item)}" data-lock><strong>${item.label}</strong><p>完成一次探索后，这一组会慢慢打开。</p></button>` : `<button type="button" class="yj-browse-item ${toneClass(item)}" data-line="${item.id}"><strong>${item.label}</strong><p>${item.note}</p></button>`).join('')}`, false);
+        } else if (state.screen === 'library') {
+          app.innerHTML = screen(`<button type="button" class="yj-back" data-go="browse">‹ 返回全部方向</button><h1>${line.icon} ${line.label}</h1><p class="yj-lede">${line.note}</p>${line.partner?'<div class="yj-line-banner">和信任的对方一起时，双方都可以随时暂停、商量或离开。每一次确认、改变主意和喊停，都算被好好听见。</div>':''}${line.activities.map((item,index) => `<button type="button" class="yj-activity" data-activity="${item.id}"><b>${index+1}</b><span>${item.title}</span></button>`).join('')}`, false);
+        } else if (state.screen === 'guide') {
+          const isLast = state.step === activity.steps.length - 1;
+          app.innerHTML = screen(`<div class="yj-guide-safety"><button type="button" class="yj-guide-pause" data-orb>${state.paused?'继续体验':'暂停'}</button><button type="button" class="yj-guide-exit" data-safe-exit>安全退出</button></div><div class="yj-orb-space"><button type="button" class="yj-orb ${state.paused?'is-paused':''}" data-orb aria-label="点击${state.paused?'继续':'暂停'}引导" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(stepProgress() * 100)}" style="--yj-progress:${stepProgress().toFixed(4)}"></button></div><p class="yj-guide-copy">${activity.steps[state.step]}</p>${activity.options?`<div aria-label="情境选择">${activity.options.map((option) => `<button type="button" class="yj-option ${state.selectedOption===option?'is-selected':''}" data-option="${escape(option)}">${option}</button>`).join('')}</div>`:''}<div class="yj-step-actions">${state.step>0?'<button type="button" class="yj-prev" data-prev>上一步</button>':''}<button type="button" class="yj-next" data-next>${isLast?'记录我的感觉':'下一步'}</button></div><div class="yj-question-tools"><button type="button" data-change-activity>↻　换一题</button>${activity.depth?'<button type="button" data-change-depth="shallow">轻一点</button><button type="button" data-change-depth="deep">更深入</button>':''}</div><div class="yj-mini-toggles"><button type="button" class="yj-mini-toggle ${state.voiceOn?'is-on':''}" data-voice aria-pressed="${state.voiceOn}">${state.voiceOn?'停止语音':'播放 AI 引导'}<i></i></button></div><p class="yj-guide-audio-status">背景声音：<b>${musicLabel(state.musicTrack)}</b>　·　在「我的 → 声音」中选择</p>`, false);
+        } else if (state.screen === 'reflect') {
+          app.innerHTML = screen(`<div class="yj-reflect" aria-label="选择体验线索">${reflectionTags().map((tag) => `<button type="button" class="yj-tag ${state.selectedTags.includes(tag.name)?'is-selected':''}" data-tag="${tag.name}">${tag.name}</button>`).join('')}</div><label class="yj-note-field">用你自己的话，记下这一刻（可留空）<textarea data-note placeholder="比如：我好像更喜欢慢一点。">${escape(state.freeNote)}</textarea></label>${activity.line.partner?`<div aria-label="选择共享方式"><button type="button" class="yj-option ${state.shareMode==='private'?'is-selected':''}" data-share-mode="private">仅自己可见</button><button type="button" class="yj-option ${state.shareMode==='once'?'is-selected':''}" data-share-mode="once">这次分享</button><button type="button" class="yj-option ${state.shareMode==='ongoing'?'is-selected':''}" data-share-mode="ongoing">长期共享（之后可撤回）</button></div>`:''}<button type="button" class="yj-primary" data-save>保存</button><button type="button" class="yj-secondary" data-skip>这次先不记</button>`, false);
+        } else if (state.screen === 'aftercare') {
+          const aftercareContent = state.aftercareWaiting ? `<h1>停在这里，<br>是完全可以的。</h1><p class="yj-lede">先安静待一会儿。</p>` : state.aftercareReady ? `<h1>停在这里，<br>是完全可以的。</h1><button type="button" class="yj-primary" data-aftercare-leave>回到安静里</button>` : `<h1>停在这里，<br>是完全可以的。</h1><p class="yj-lede">此刻你想？</p><button type="button" class="yj-option" data-aftercare-leave>就这样离开</button><button type="button" class="yj-option" data-aftercare-wait>我还想再待一会</button><button type="button" class="yj-option" data-aftercare-reflect>记一下刚才</button>`;
+          app.innerHTML = screen(aftercareContent, false);
+        } else if (state.screen === 'map') {
+          const explored = state.explorations.length;
+          app.innerHTML = screen(`<div class="yj-today-head"><h1>我的愉悦地图</h1><button type="button" class="yj-cycle" data-go="browse">探索其他</button></div><div class="yj-lake-scene" aria-label="探索会让萤火虫和湖面的微光逐渐亮起"><canvas class="yj-lake-canvas" data-lake aria-hidden="true"></canvas><div class="yj-lake-copy">${explored ? '你留下的每一点感觉，都在这里慢慢发亮。' : '从第一次探索开始，留下一点光。'}</div><div class="yj-lake-count"><b>${explored}</b> 条线索</div></div>${mapGroup('身体信号','•','body','还没有也没关系。下次有感觉时再留一条。')}${mapGroup('情绪感受','•','emotion','还没有也没关系。等它慢慢浮现。')}${mapGroup('欲望指向','•','desire','不用现在决定。下次想靠近时再看看。')}${mapGroup('偏好线索','•','preference','还不确定也没关系，想再试试时再来。')}${noteBlock()}${sharedSummary()}${prototype()}${state.signals.length ? '<button type="button" class="yj-secondary" data-go="manage">编辑或删除线索</button>' : ''}`, 'map');
+        } else if (state.screen === 'shared') {
+          app.innerHTML = screen(`<button type="button" class="yj-back" data-go="map">‹ 返回愉悦地图</button><h1>你们一起<br>记下的话</h1><p class="yj-lede">双方都可以改。这里不需要写得漂亮，只要下次看得懂就好。</p>${state.sharedEntries.length ? state.sharedEntries.map((entry,index) => `<div class="yj-shared-entry"><strong>${escape(entry.activity)} · ${entry.mode==='ongoing'?'长期共享':'这次分享'}</strong><span>${entry.tags.length ? escape(entry.tags.join(' · ')) : '没有选标签'}</span><label class="yj-note-field">留给下一次的话<textarea data-shared-note="${index}" placeholder="比如：下次想再慢一点。">${escape(entry.note)}</textarea></label><button type="button" class="yj-secondary" data-delete-shared="${index}">撤回这条分享</button></div>`).join('') : '<div class="yj-map-block"><span class="yj-empty">还没有共同记录。等你们想留下一句的时候再来。</span></div>'}<button type="button" class="yj-primary" data-go="map">先放在这里</button>`, false);
+        } else if (state.screen === 'manage') {
+          app.innerHTML = screen(`<button type="button" class="yj-back" data-go="map">‹ 返回愉悦地图</button><h1>这些话，<br>随时可以改。</h1><p class="yj-lede">更接近你现在的说法就好；不想留下的，也可以删掉。</p>${state.signals.map((signal,index) => `<div class="yj-shared-entry"><strong>${escape(signal.activity)}</strong><label class="yj-note-field">这条线索<textarea data-signal="${index}">${escape(signal.name)}</textarea></label><button type="button" class="yj-secondary" data-delete-signal="${index}">删除这条线索</button></div>`).join('')}<button type="button" class="yj-primary" data-go="map">先放在这里</button>${state.pendingDeleteSignal !== null ? `<div class="yj-confirm" data-close-confirm><div class="yj-confirm-box" role="dialog" aria-modal="true" aria-label="确认删除"><p>删除这条线索？</p><button type="button" data-confirm-delete>确认删除</button></div></div>` : ''}`, false);
+        } else if (state.screen === 'sound') {
+          app.innerHTML = screen(`<button type="button" class="yj-back" data-go="me">‹ 返回我的</button><h1>声音</h1><p class="yj-lede">背景声音只在体验进行时播放；点选任意声音可试听九秒。</p><p class="yj-me-section">背景声音</p><div class="yj-sound-choices">${musicTracks.map((track) => `<button type="button" class="yj-sound-choice ${state.musicTrack===track.id?'is-selected':''}" data-music-track="${track.id}"><strong>${track.label}</strong><small>${track.note}</small></button>`).join('')}</div><p class="yj-me-section">AI 引导音色</p><p class="yj-sound-caption">音色影响朗读的语速和语调。正式配音上线后，可在这里替换为固定的品牌声线。</p><div class="yj-sound-choices">${voiceStyles.map((voice) => `<button type="button" class="yj-sound-choice ${state.voiceStyle===voice.id?'is-selected':''}" data-voice-style="${voice.id}"><strong>${voice.label}</strong><small>${voice.note}</small></button>`).join('')}</div>`, false);
+        } else {
+          const history = state.interruptions.slice(-3).reverse();
+          app.innerHTML = screen(`<h1>我的</h1><div class="yj-profile"><div class="yj-avatar" aria-hidden="true">B</div><div><strong>Beforecare 用户</strong><span>beforecare@example.com　·　手机号已绑定</span></div></div><p class="yj-me-section">账号与授权</p><div class="yj-me-item"><span>账号信息</span><span>邮箱 / 手机号　›</span></div><div class="yj-me-item"><span>已授权账号</span><span>Apple ID　›</span></div><p class="yj-me-section">设置</p><div class="yj-me-item"><span>语言</span><span>简体中文　›</span></div><div class="yj-me-item"><span>主题</span><span>深色　›</span></div><button type="button" class="yj-me-item" data-go="sound"><span>声音</span><span>${musicLabel(state.musicTrack)}　›</span></button><div class="yj-me-item"><span>评价 Beforecare</span><span>›</span></div><p class="yj-me-section">历史中断体验</p>${history.length ? history.map((item,index) => `<div class="yj-me-item"><span>${escape(item.activity)} · 第 ${item.step} 步</span><span>${index===0?'可继续　›':escape(item.reason)}</span></div>`).join('') : '<div class="yj-me-item"><span>暂无中断体验</span><span>›</span></div>'}${state.lastIncomplete ? `<div class="yj-resume"><strong>上次，你停在了这里。</strong><span>${escape(state.lastIncomplete.activity)} · 第 ${state.lastIncomplete.step} 步</span><button type="button" class="yj-secondary" data-resume>进入上一次体验</button></div>` : ''}`, 'me');
+        }
+        if (state.screen === 'map') lake.start(state.explorations.length);
+        syncTimer();
+      };
+      const notify = (message) => { toast.textContent = message; toast.classList.add('is-visible'); window.setTimeout(() => toast.classList.remove('is-visible'), 2400); };
+      const playCurrentGuideVoice = () => {
+        if (!state.voiceOn || state.paused || state.screen !== 'guide') return;
+        if (!audio.speak(current().steps[state.step], state.voiceStyle)) notify('此设备暂不支持语音播放。');
+      };
+      let wakeLock = null;
+      const keepScreenAwake = async () => { try { wakeLock = await navigator.wakeLock?.request('screen'); } catch (_) {} };
+      const releaseScreen = async () => { try { await wakeLock?.release(); } catch (_) {} wakeLock = null; };
+      const recordInterruption = (reason) => { const activity = current(); const entry = {activity:activity.title, activityId:activity.id, step:state.step + 1, reason, at:Date.now()}; state.interruptions = [...state.interruptions, entry]; state.lastIncomplete = entry; state.resumeDismissed = false; try { window.localStorage.setItem('beforecare-last-incomplete', JSON.stringify(entry)); } catch (_) {} };
+      root.addEventListener('pointerdown', (event) => {
+        const bounds = phone.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+        fluid.ripple(event.clientX - bounds.left, event.clientY - bounds.top);
+      });
+      root.addEventListener('click', (event) => {
+        if (event.target.matches('[data-close-confirm]')) { state.pendingDeleteSignal = null; render(); return; }
+        const button = event.target.closest('button'); if (!button) return;
+        if (button.dataset.enter !== undefined) { state.screen = state.hasAcknowledged ? 'home' : 'privacy'; render(); return; }
+        if (button.dataset.acknowledge !== undefined) { if (!state.privacyKnown) return; state.hasAcknowledged = true; try { window.localStorage.setItem('beforecare-privacy-known', 'true'); } catch (_) {} state.screen = 'home'; render(); return; }
+        if (button.dataset.go) { if (state.screen === 'guide' && button.dataset.go !== 'reflect') { recordInterruption('提前离开'); state.stepTimerEndsAt = 0; state.paused = false; releaseScreen(); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'aftercare'; render(); return; } if (button.dataset.go !== 'guide') releaseScreen(); state.screen = button.dataset.go; render(); return; }
+        if (button.dataset.nav) { if (state.screen === 'guide') { recordInterruption('提前离开'); state.stepTimerEndsAt = 0; state.paused = false; releaseScreen(); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'aftercare'; render(); return; } state.screen = button.dataset.nav; render(); return; }
+        if (button.dataset.lock !== undefined) { notify('先完成一次个人探索，这一组就会打开。'); return; }
+        if (button.dataset.cycle !== undefined) { state.homeLine = (state.homeLine + 1) % lines.length; render(); return; }
+        if (button.dataset.feature !== undefined) { state.lineId = featured().id; state.screen = 'library'; render(); return; }
+        if (button.dataset.line) { const line = lines.find((item) => item.id === button.dataset.line); if (line?.partner && !partnerUnlocked()) { notify('先完成一次个人探索，这一组就会打开。'); return; } state.lineId = button.dataset.line; state.screen = 'library'; render(); return; }
+        if (button.dataset.activity) { state.activityId = button.dataset.activity; state.step = 0; state.selectedTags = []; state.selectedOption = ''; state.freeNote = ''; state.shareMode = 'private'; state.paused = false; rememberDepth(current()); startStepTimer(current()); keepScreenAwake(); state.screen = 'guide'; render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.surprise !== undefined) { const surprise = chooseSoloActivity(); state.lineId = surprise.line.id; state.activityId = surprise.id; state.step = 0; state.selectedTags = []; state.selectedOption = ''; state.freeNote = ''; state.shareMode = 'private'; state.paused = false; rememberDepth(surprise); startStepTimer(current()); keepScreenAwake(); state.screen = 'guide'; render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.changeActivity !== undefined) { const alternative = chooseAnotherInLine(); state.activityId = alternative.id; state.step = 0; state.selectedTags = []; state.selectedOption = ''; state.freeNote = ''; state.shareMode = 'private'; state.paused = false; rememberDepth(current()); startStepTimer(current()); render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.changeDepth) { const alternative = chooseSoloActivity(button.dataset.changeDepth); state.lineId = alternative.line.id; state.activityId = alternative.id; state.step = 0; state.selectedTags = []; state.selectedOption = ''; state.freeNote = ''; state.shareMode = 'private'; state.paused = false; rememberDepth(alternative); startStepTimer(current()); render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.start !== undefined) { state.step = 0; state.paused = false; startStepTimer(current()); keepScreenAwake(); state.screen = 'guide'; render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.prev !== undefined) { state.step = Math.max(0,state.step-1); state.paused = false; startStepTimer(current()); render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.next !== undefined) { if (state.step < current().steps.length-1) { state.step += 1; state.paused = false; startStepTimer(current()); } else { state.selectedTags = []; state.stepTimerEndsAt = 0; releaseScreen(); state.screen = 'reflect'; } render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.voice !== undefined) { state.voiceOn = !state.voiceOn; if (!state.voiceOn) audio.stopVoice(); render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.musicTrack !== undefined) { state.musicTrack = button.dataset.musicTrack; saveSetting('beforecare-music-track', state.musicTrack); render(); if (state.musicTrack === 'off') { notify('体验时会保持安静。'); } else if (audio.startMusic(state.musicTrack, true)) { notify(`正在试听${musicLabel(state.musicTrack)}。`); } else { notify('此设备暂不支持环境声。'); } return; }
+        if (button.dataset.voiceStyle !== undefined) { state.voiceStyle = button.dataset.voiceStyle; saveSetting('beforecare-voice-style', state.voiceStyle); render(); if (audio.speak(current().steps[state.step], state.voiceStyle)) notify(`正在试听${voiceLabel(state.voiceStyle)}音色。`); else notify('此设备暂不支持语音播放。'); return; }
+        if (button.dataset.safeExit !== undefined) { recordInterruption('安全退出'); state.stepTimerEndsAt = 0; state.paused = false; releaseScreen(); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'aftercare'; render(); return; }
+        if (button.dataset.orb !== undefined || button.dataset.pause !== undefined) { if (!state.stepTimerDuration) { state.paused = !state.paused; if (state.paused) audio.stopVoice(); render(); playCurrentGuideVoice(); return; } if (state.paused) { state.paused = false; state.stepTimerEndsAt = Date.now() + state.pausedRemaining * 1000; } else { state.pausedRemaining = Math.max(0, (state.stepTimerEndsAt - Date.now()) / 1000); state.paused = true; audio.stopVoice(); } render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.soften !== undefined) { const activities = current().line.activities; const index = activities.findIndex((item) => item.id === current().id); const alternative = activities[(index + 1) % activities.length]; recordInterruption('换个更温和的'); state.activityId = alternative.id; state.step = 0; state.selectedOption = ''; state.freeNote = ''; state.paused = false; startStepTimer(current()); state.screen = 'guide'; render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.hideLine !== undefined) { const lineId = current().line.id; recordInterruption('不再出现这一类'); state.hiddenLines = [...state.hiddenLines, lineId]; state.stepTimerEndsAt = 0; releaseScreen(); state.screen = 'home'; render(); notify('这一类先为你收起来。'); return; }
+        if (button.dataset.endCare !== undefined) { recordInterruption('结束并安抚'); state.stepTimerEndsAt = 0; state.paused = false; releaseScreen(); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'aftercare'; render(); return; }
+        if (button.dataset.safeWord !== undefined) { recordInterruption('安全词：现在停一下'); state.stepTimerEndsAt = 0; state.paused = false; releaseScreen(); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'aftercare'; render(); return; }
+        if (button.dataset.aftercareLeave !== undefined) { window.clearTimeout(aftercareTicker); state.aftercareWaiting = false; state.aftercareReady = false; state.screen = 'home'; render(); return; }
+        if (button.dataset.aftercareWait !== undefined) { state.aftercareWaiting = true; state.aftercareReady = false; render(); window.clearTimeout(aftercareTicker); aftercareTicker = window.setTimeout(() => { state.aftercareWaiting = false; state.aftercareReady = true; render(); }, 15000); return; }
+        if (button.dataset.aftercareReflect !== undefined) { window.clearTimeout(aftercareTicker); state.aftercareWaiting = false; state.aftercareReady = false; state.selectedTags = []; state.freeNote = ''; state.screen = 'reflect'; render(); return; }
+        if (button.dataset.option) { state.selectedOption = button.dataset.option; render(); return; }
+        if (button.dataset.tag) { const tag = button.dataset.tag; state.selectedTags = state.selectedTags.includes(tag) ? state.selectedTags.filter((item) => item !== tag) : [...state.selectedTags, tag]; if (tag.includes('没什么特别感觉') || tag.includes('还不确定') || tag.includes('还没找到') || tag.includes('不好意思')) notify('没关系。可以换一种更温和的引导试试看。'); render(); return; }
+        if (button.dataset.shareMode) { state.shareMode = button.dataset.shareMode; render(); return; }
+        if (button.dataset.save !== undefined) {
+          const activity = current(); const selected = reflectionTags().filter((tag) => state.selectedTags.includes(tag.name)); const option = activity.optionGroup && state.selectedOption && !state.selectedOption.includes('不确定') && !state.selectedOption.includes('需要更多') ? [{name:state.selectedOption, group:activity.optionGroup}] : [];
+          const recordId = `${Date.now()}-${Math.random().toString(16).slice(2)}`; const newSignals = [...selected, ...option].filter((tag) => tag.group !== 'none').map((tag) => ({...tag, activity:activity.title, partner:activity.line.partner, recordId}));
+          const note = state.freeNote.trim(); state.signals = [...state.signals, ...newSignals];
+          if (note) state.notes = [...state.notes, {activity:activity.title, text:note, partner:activity.line.partner, recordId}];
+          if (activity.line.partner && state.shareMode !== 'private' && (newSignals.length || note)) state.sharedEntries = [...state.sharedEntries, {activity:activity.title, tags:newSignals.map((signal) => signal.name), note, mode:state.shareMode}];
+          if (newSignals.length || note) state.explorations = [...state.explorations, {id:recordId, activity:activity.title, partner:activity.line.partner, at:Date.now()}];
+          state.freeNote = ''; state.stepTimerEndsAt = 0; state.lastIncomplete = null; try { window.localStorage.removeItem('beforecare-last-incomplete'); } catch (_) {} state.screen = 'map'; render(); notify(newSignals.length || note ? (activity.line.partner && state.shareMode !== 'private' ? '已收进愉悦地图，也分享给对方' : '已收进我的愉悦地图') : '没关系。下次想记时再来。'); return;
+        }
+        if (button.dataset.skip !== undefined) { recordInterruption('这次先不记'); state.stepTimerEndsAt = 0; state.screen = 'map'; render(); return; }
+        if (button.dataset.careSave !== undefined) { const note = state.freeNote.trim(); if (note) state.notes = [...state.notes, {activity:current().title, text:note, partner:current().line.partner}]; state.freeNote = ''; state.screen = 'home'; render(); notify('今天，你照顾过自己了。'); return; }
+        if (button.dataset.deleteNote !== undefined) { const index = Number(button.dataset.deleteNote); const removed = state.notes[index]; state.notes = state.notes.filter((_, item) => item !== index); if (removed?.recordId && !state.signals.some((signal) => signal.recordId === removed.recordId)) state.explorations = state.explorations.filter((item) => item.id !== removed.recordId); render(); notify('这句话已经收起来了。'); return; }
+        if (button.dataset.deleteSignal !== undefined) { state.pendingDeleteSignal = Number(button.dataset.deleteSignal); render(); return; }
+        if (button.dataset.confirmDelete !== undefined) { const index = state.pendingDeleteSignal; const removed = state.signals[index]; state.signals = state.signals.filter((_, item) => item !== index); if (removed?.recordId && !state.signals.some((signal) => signal.recordId === removed.recordId) && !state.notes.some((note) => note.recordId === removed.recordId)) state.explorations = state.explorations.filter((item) => item.id !== removed.recordId); state.pendingDeleteSignal = null; render(); return; }
+        if (button.dataset.deleteShared !== undefined) { const index = Number(button.dataset.deleteShared); state.sharedEntries = state.sharedEntries.filter((_, item) => item !== index); render(); notify('这条分享已经撤回。'); return; }
+        if (button.dataset.connect !== undefined) { notify('邀请链接已准备好；是否连接，始终由你决定。'); return; }
+        if (button.dataset.resume !== undefined && state.lastIncomplete) { state.activityId = state.lastIncomplete.activityId; state.lineId = current().line.id; state.step = Math.max(0, state.lastIncomplete.step - 1); state.paused = false; startStepTimer(current()); state.resumeDismissed = true; keepScreenAwake(); state.screen = 'guide'; render(); playCurrentGuideVoice(); return; }
+        if (button.dataset.dismissResume !== undefined) { state.resumeDismissed = true; render(); return; }
+      });
+      root.addEventListener('change', (event) => { if (event.target.matches('[data-privacy-known]')) { state.privacyKnown = event.target.checked; render(); } });
+      root.addEventListener('input', (event) => {
+        if (event.target.matches('[data-note]')) state.freeNote = event.target.value;
+        if (event.target.matches('[data-shared-note]')) { const index = Number(event.target.dataset.sharedNote); if (state.sharedEntries[index]) state.sharedEntries[index].note = event.target.value; }
+        if (event.target.matches('[data-signal]')) { const index = Number(event.target.dataset.signal); if (state.signals[index]) state.signals[index].name = event.target.value; }
+      });
+      window.addEventListener('pagehide', () => { audio.stopMusic(); audio.stopVoice(); if (state.screen === 'guide') recordInterruption('今天，停在了这里。'); });
+      render();
+    })();
+  </script>
+</div>
