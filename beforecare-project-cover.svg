@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">beforecare｜好的 aftercare，从 beforecare 开始</title>
+  <desc id="desc">女性私密愉悦探索产品 Beforecare 的项目封面图</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a09"/>
+      <stop offset="0.46" stop-color="#122a29"/>
+      <stop offset="1" stop-color="#4f4a45"/>
+    </linearGradient>
+    <radialGradient id="limeGlow" cx="0.79" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#d8fb62" stop-opacity="0.28"/>
+      <stop offset="0.42" stop-color="#9abf69" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#9abf69" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="peachGlow" cx="0.17" cy="0.90" r="0.60">
+      <stop offset="0" stop-color="#ffd5b0" stop-opacity="0.23"/>
+      <stop offset="1" stop-color="#ffd5b0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#162e2a"/>
+      <stop offset="0.58" stop-color="#203d35"/>
+      <stop offset="1" stop-color="#554d48"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19342f"/>
+      <stop offset="1" stop-color="#101a17"/>
+    </linearGradient>
+    <filter id="blur40" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="blur18" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#000" flood-opacity="0.42"/>
+    </filter>
+    <pattern id="grain" width="90" height="90" patternUnits="userSpaceOnUse">
+      <circle cx="11" cy="19" r="0.8" fill="#fff" opacity="0.04"/>
+      <circle cx="54" cy="63" r="0.7" fill="#fff" opacity="0.03"/>
+      <circle cx="81" cy="31" r="0.6" fill="#fff" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#limeGlow)"/>
+  <rect width="1600" height="900" fill="url(#peachGlow)"/>
+  <rect width="1600" height="900" fill="url(#grain)"/>
+
+  <!-- quiet orbit lines -->
+  <g fill="none" stroke="#d8fb62" opacity="0.10">
+    <ellipse cx="1275" cy="430" rx="410" ry="310" stroke-width="2"/>
+    <ellipse cx="1275" cy="430" rx="505" ry="382" stroke-width="1"/>
+    <ellipse cx="1275" cy="430" rx="604" ry="456" stroke-width="1"/>
+  </g>
+  <circle cx="1275" cy="430" r="240" fill="#d8fb62" opacity="0.06" filter="url(#blur40)"/>
+
+  <!-- left copy -->
+  <g font-family="PingFang SC, Noto Sans CJK SC, Helvetica Neue, Arial, sans-serif">
+    <text x="108" y="112" fill="#d8fb62" font-size="18" font-weight="600" letter-spacing="3">beforecare</text>
+    <text x="108" y="155" fill="#d8d0ff" font-size="13" letter-spacing="2.8">PRODUCT DEMO · PRIVATE WELLNESS</text>
+    <rect x="108" y="188" width="54" height="4" rx="2" fill="#d8fb62"/>
+
+    <text x="108" y="330" fill="#f4f5e9" font-size="70" font-weight="500" letter-spacing="-3.5">好的 aftercare，</text>
+    <text x="108" y="422" fill="#f4f5e9" font-size="70" font-weight="500" letter-spacing="-3.5">从 beforecare 开始</text>
+    <text x="112" y="480" fill="#b8c1b5" font-size="23" font-weight="400">一个没有失败、可以随时停下来的</text>
+    <text x="112" y="516" fill="#b8c1b5" font-size="23" font-weight="400">愉悦探索空间。</text>
+
+    <g transform="translate(108 610)">
+      <rect width="165" height="44" rx="22" fill="#d8fb62"/>
+      <text x="82.5" y="28" text-anchor="middle" fill="#222518" font-size="15" font-weight="600">5 分钟体验</text>
+      <rect x="178" width="165" height="44" rx="22" fill="#18241f" stroke="#ffffff" stroke-opacity="0.13"/>
+      <text x="260.5" y="28" text-anchor="middle" fill="#dbe4d5" font-size="15">身体觉察</text>
+      <rect x="356" width="165" height="44" rx="22" fill="#18241f" stroke="#ffffff" stroke-opacity="0.13"/>
+      <text x="438.5" y="28" text-anchor="middle" fill="#dbe4d5" font-size="15">轻柔记录</text>
+    </g>
+    <text x="112" y="764" fill="#838d83" font-size="14" letter-spacing="1.8">一次只做一件事 · 跟着感觉走 · 随时可以停</text>
+  </g>
+
+  <!-- phone mockup -->
+  <g filter="url(#shadow)">
+    <rect x="1016" y="92" width="382" height="724" rx="52" fill="#080b09" stroke="#d8fb62" stroke-opacity="0.24" stroke-width="2"/>
+    <rect x="1028" y="104" width="358" height="700" rx="43" fill="url(#phone)"/>
+    <rect x="1152" y="117" width="110" height="27" rx="14" fill="#030403"/>
+    <text x="1055" y="165" fill="#eef1e6" font-size="12" opacity="0.82" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">9:41</text>
+    <text x="1356" y="165" text-anchor="end" fill="#eef1e6" font-size="12" opacity="0.82" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">●  ▰  ▰</text>
+    <text x="1060" y="220" fill="#d8d0ff" font-size="11" letter-spacing="1.5" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">TODAY / 今天</text>
+    <text x="1060" y="252" fill="#f4f5e9" font-size="27" font-weight="500" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">只看这一件事</text>
+    <text x="1060" y="279" fill="#a7a99d" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">心动欲望 · 约 3 分钟</text>
+
+    <rect x="1053" y="315" width="308" height="314" rx="31" fill="url(#card)" stroke="#d8fb62" stroke-opacity="0.18"/>
+    <circle cx="1207" cy="412" r="54" fill="#d8fb62" opacity="0.08" filter="url(#blur18)"/>
+    <circle cx="1207" cy="412" r="42" fill="none" stroke="#d8fb62" stroke-opacity="0.72" stroke-width="2"/>
+    <circle cx="1207" cy="412" r="49" fill="none" stroke="#d8fb62" stroke-opacity="0.17" stroke-width="7" stroke-dasharray="238 80" transform="rotate(-90 1207 412)"/>
+    <path d="M1207 395 l5 12 12 5 -12 5 -5 12 -5-12 -12-5 12-5z" fill="#d8fb62"/>
+    <text x="1207" y="493" text-anchor="middle" fill="#fbfbf0" font-size="24" font-weight="500" font-family="Songti SC, STSong, serif">这个画面，让你</text>
+    <text x="1207" y="528" text-anchor="middle" fill="#fbfbf0" font-size="24" font-weight="500" font-family="Songti SC, STSong, serif">更想「靠近」，还是「被碰」？</text>
+    <text x="1207" y="573" text-anchor="middle" fill="#b7c2b6" font-size="12" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">让它停十秒，不急着解释</text>
+
+    <rect x="1053" y="654" width="308" height="54" rx="18" fill="#d8fb62"/>
+    <text x="1207" y="688" text-anchor="middle" fill="#222518" font-size="16" font-weight="600" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">继续</text>
+    <text x="1062" y="746" fill="#bbc6b8" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">换个更浅的</text>
+    <text x="1352" y="746" text-anchor="end" fill="#bbc6b8" font-size="11" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">想更深入一点</text>
+    <text x="1207" y="779" text-anchor="middle" fill="#869287" font-size="10" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">语音 ○   音乐 ○</text>
+  </g>
+
+  <!-- breathing star -->
+  <g transform="translate(1438 126)">
+    <circle r="35" fill="#d8fb62" opacity="0.12" filter="url(#blur18)"/>
+    <path d="M0-20 C4-8 8-4 20 0 C8 4 4 8 0 20 C-4 8 -8 4 -20 0 C-8-4 -4-8 0-20Z" fill="#d8fb62"/>
+    <circle r="29" fill="none" stroke="#d8fb62" stroke-opacity="0.38" stroke-width="1.5"/>
+  </g>
+  <text x="1498" y="784" text-anchor="end" fill="#9ca99c" font-size="12" letter-spacing="2" font-family="PingFang SC, Noto Sans CJK SC, sans-serif">beforecare · 2026</text>
+</svg>
